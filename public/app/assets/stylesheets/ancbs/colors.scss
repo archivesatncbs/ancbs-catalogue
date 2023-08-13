@@ -1,0 +1,57 @@
+/* colors and icons for your institution */
+
+$ancbs-brown: #824141;
+$ancbs-deepbrown: #463a3a;
+$ancbs-red: #d44132;        $ancbs-white1: #e6ede8;
+$ancbs-deepgreen: #467d80;  $ancbs-white2: #e3e3ed;
+$ancbs-green: #376e55;      $ancbs-white3: #e8d9c0;
+$ancbs-blue: #3c6ea7;       $ancbs-white4: #eddede;
+
+$black: #000;
+$darkest: #00171f;
+$white: #fff;
+$darkblue: #041c2f;
+$midblue: #006e99;
+$lightblue: #007cad;
+$darkshade: #888;
+$shade: #ccc;
+$lightshade: #eee;
+$highlight: #f7d309;
+$dark_against_shade: $ancbs-deepbrown; /* for contrast against lightshade */
+
+
+/* this is where you can change colors for your institution */
+
+$primary-color: $ancbs-deepbrown;
+$secondary-color: $ancbs-brown;
+$accent-color: $ancbs-green;
+$border-accent: $ancbs-deepbrown;
+$border: $ancbs-white1;
+$image-background: $ancbs-white1;
+$row-background: $ancbs-white3;
+$button-background: $ancbs-green;
+$alt-button-background: $ancbs-green;
+$alt-button-color: $ancbs-green;
+$light-neutral: $ancbs-white4;
+$breadcrumb-link: $ancbs-green;
+
+/* this is for the top horizontal nav bar */
+$nvBgDefault: $light-neutral;
+$nvBgHighlight: $light-neutral;
+$nvColDefault: $ancbs-brown;
+$nvColHighlight: $border-accent;
+
+$collection-color: #e01919;
+$subject-color: #941c9a;
+$container-color: #0b5a14;
+$agent-color: #3b52ff;
+$record-color: #0b5a14;
+$repository-color: #7608b5;
+$classification-color: #015189;
+$accession-color: $collection-color;
+$digital-object-color: $collection-color;
+$archival-object-color: #457141;
+$folder-color: #009fcf;
+
+
+

@@ -21,12 +21,45 @@
 
 en:
   brand:
-    title: ArchivesSpace Public Interface
-    title_link_text: Return to the ArchivesSpace homepage
-    welcome_head: Welcome to ArchivesSpace
+    title: Archives at NCBS
+    title_link_text: Return to the catalogue homepage
+    start_year: 2019
+    welcome_head: Welcome to the online catalogue of Archives at NCBS
     welcome_message: |
-      <p>Search across our collections, digital materials, and more.</p>
-    welcome_page_title: ArchivesSpace Public Interface
+      <h3>About</h3>
+      <p>The Archives at NCBS is a public collecting centre for the history of science in contemporary India. The Archives is free and open to the public. It is located in a 2000 square feet space in the Eastern Lab Complex (ELC) basement in NCBS, a space that was formerly occupied by Obaid Siddiqi, the co-founder of NCBS, and his laboratory. It includes space for research, processing, exhibitions, recording, and a leading-edge storage facility with monitors for temperature, light, humidity, air quality, water, fire, pests, and noise. The publicly accessible catalogue of 150,000 objects spans 25 collections and in various forms, ranging from paper-based manuscripts to negatives to photographs, books, fine art, audio recordings, scientific equipment, letters, and field and lab notes. The reading rooms are open to the public and researchers without prior appointment. However, you may need an appointment to review the archival holdings</p>
+
+    welcome_page_title: Catalogue
+    access_url: https://archives.ncbs.res.in/access
+    access_message: |
+      <h3>Access</h3>
+      <p>Most collections at the Archives at NCBS are described at the level of file/folder. All folder-level descriptions at the Archives at NCBS follow a standard naming convention, and this is indicated in the field titled <em>Identifier</em> in the catalogue.
+
+      For instance, refer to the identifier, MS-007-2-2-10-7 for the file on <a href="http://catalogue.archives.ncbs.res.in/repositories/2/archival_objects/5364">correspondence between MS Swaminathan and BM Pal on 23 December 1957 and 31 December 1957</a>. Here is the naming convention breakdown:
+      <br><br>
+      <b>MS-007-2-2-10-7</b>
+      <br>
+      <b>MS</b> : Manuscripts
+      <br>
+      <b>007</b> : 7th manuscript collection at Archives at NCBS
+      <br>
+      <b>2</b> : Series number (Correspondence)
+      <br>
+      <b>2</b> : Sub-series number (1954-1972)
+      <br>
+      <b>10</b> : Box or container number or location
+      <br>
+      <b>7</b> : Folder or sub-container number
+      <br><br>
+
+      The Archives at NCBS is only providing this information to help researchers understand the naming convention across the collections. Researchers using the archives only need to submit the full identifier in the <b>Researcher Application Form</b> or the <b>Material Use Form</b> outlined in the Resources section.
+
+      <h3>Resources</h3>
+      <h5><a href="http://archives.ncbs.res.in/sites/default/files/NI-007_0013-0_Access%20and%20Use_Fill.pdf">Researcher Application Form</a> &#x1F58E;<h5>
+      <h5><a href="http://archives.ncbs.res.in/sites/default/files/NI-007_0014-1_Material_Use_Form_Fill.pdf">Material Use Form</a> &#x1F58E;</h5>
+
+    collections_url: https://collections.archives.ncbs.res.in
+    url: https://archives.ncbs.res.in
 
   actions:
     search: Search
@@ -68,7 +101,8 @@ en:
     note: Note to the staff
     visit: "Submit a request to visit %{repo_name} to view <strong>%{archival_object}</strong>"
     submit: Submit Request
-    submitted: Thank you, your request has been submitted.  You will soon receive an email with a
+    submitted:
+      Thank you, your request has been submitted.  You will soon receive an email with a
       copy of your request.
     errors:
       name: Please enter your name
@@ -196,10 +230,12 @@ en:
 
   errors:
     error_404: "%{type} Record Not Found"
-    error_404_message: "The %{type} record you've tried to access does not exist or may have been\
+    error_404_message:
+      "The %{type} record you've tried to access does not exist or may have been\
       \ removed."
     backend_down: Unable to Connect to Database
-    backend_down_message: ArchivesSpace is currently experiencing technical difficulties. We
+    backend_down_message:
+      The catalogue at Archives at NCBS is currently experiencing technical difficulties. We
       apologise for the inconvenience. Please try again later.
     unexpected_error: Your request could not be completed due to an unexpected error
 
@@ -354,7 +390,7 @@ en:
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection: Browse %{num} digital objects in collection
-      
+
   subject:
     _singular: Subject
     _plural: Subjects
@@ -455,7 +491,7 @@ en:
     table_of_contents: Table Of Contents
     publication_statement: Publication Statement
     controlled_access_headings: Controlled Access Headings
-    finding_aid_date_prefix: This finding aid was produced using ArchivesSpace on
+    finding_aid_date_prefix: This finding aid was produced by Archives at NCBS on
     finding_aid_written_in: Finding aid written in
     your_finding_aid_pdf: Your finding aid PDF for "%{title}"
     your_finding_aid_is_attached: The finding aid you requested is attached.

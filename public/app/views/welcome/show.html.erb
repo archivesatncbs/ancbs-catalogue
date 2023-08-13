@@ -1,9 +1,13 @@
+<!--
 <%= render partial: 'shared/language_select' %>
+-->
 
 <div class="row">
   <div class="col-sm-12">
+  <!--
     <h2><%= t('brand.welcome_head') %></h2>
       <div> <%= t('brand.welcome_message').html_safe %> </div>
+  -->
   </div>
 </div>
 
@@ -24,6 +28,14 @@
             ["#{t('search_results.filter.identifier')}", 'identifier']
            ]
     } %>
+
+    <div class="col-sm-6">
+      <div> <%= t('brand.welcome_message').html_safe %> </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div> <%= t('brand.access_message').html_safe %> </div>
+    </div>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %>
         <%= render(:file => template, :locals => {:record => record}) if File.exists?(template) %>
