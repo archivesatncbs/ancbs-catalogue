@@ -29,13 +29,18 @@
            ]
     } %>
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div> <%= t('brand.welcome_message').html_safe %> </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div> <%= t('brand.access_message').html_safe %> </div>
     </div>
+
+    <div class="col-sm-4">
+      <div> <%= t('brand.search_boosting_message').html_safe %> </div>
+    </div>
+
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %>
         <%= render(:file => template, :locals => {:record => record}) if File.exists?(template) %>
