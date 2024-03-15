@@ -418,7 +418,7 @@ en:
       thumbnail: thumbnail
       link: Link to digital object
       badge_label: Digital %{level}
-      go: Go to file
+      go: Go to digital file
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection: Browse %{num} digital objects in collection
