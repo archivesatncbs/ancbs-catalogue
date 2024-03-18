@@ -148,9 +148,9 @@ class EADSerializer < ASpaceExport::Serializer
 
     doc = Nokogiri::XML::Builder.new(:encoding => "UTF-8") do |xml|
       ead_attributes = {
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xsi:schemaLocation' => 'urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd',
-        'xmlns:xlink' => 'http://www.w3.org/1999/xlink'
+        'xmlns:xsi' => 'https://www.w3.org/2001/XMLSchema-instance',
+        'xsi:schemaLocation' => 'urn:isbn:1-931666-22-9 https://www.loc.gov/ead/ead.xsd',
+        'xmlns:xlink' => 'https://www.w3.org/1999/xlink'
       }
 
       if data.publish === false
@@ -401,6 +401,7 @@ class EADSerializer < ASpaceExport::Serializer
 
           xml.send(node_name, atts) {
             sanitize_mixed_content(sort_name, xml, fragments )
+            EADSerializer.run_serialize_step(agent, xml, fragments, node_name.to_sym)
           }
         }
       end
@@ -408,17 +409,20 @@ class EADSerializer < ASpaceExport::Serializer
   end
 
   def serialize_controlaccess(data, xml, fragments)
-    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents(@include_unpublished).length) > 0
+    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents(@include_unpublished).reject {|x| x.empty?}.length) > 0
       xml.controlaccess {
-        data.controlaccess_subjects.each do |node_data|
+        data.controlaccess_subjects.zip(data.subjects).each do |node_data, subject|
           xml.send(node_data[:node_name], node_data[:atts]) {
             sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
+            EADSerializer.run_serialize_step(subject['_resolved'], xml, fragments, node_data[:node_name].to_sym)
           }
         end
 
-        data.controlaccess_linked_agents(@include_unpublished).each do |node_data|
+        data.controlaccess_linked_agents(@include_unpublished).zip(data.linked_agents).each do |node_data, agent|
+          next if node_data.empty?
           xml.send(node_data[:node_name], node_data[:atts]) {
             sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
+            EADSerializer.run_serialize_step(agent['_resolved'], xml, fragments, node_data[:node_name].to_sym)
           }
         end
       } #</controlaccess>
@@ -659,7 +663,7 @@ class EADSerializer < ASpaceExport::Serializer
             sanitize_mixed_content( content, xml, fragments, ASpaceExport::Utils.include_p?(note['type']) )
           }
         }
-      when 'physdesc', 'abstract'
+      when 'physdesc', 'abstract', 'physloc'
         att[:label] = note['label'] if note['label']
         xml.send(note['type'], att.merge(audatt)) {
           sanitize_mixed_content(content, xml, fragments, ASpaceExport::Utils.include_p?(note['type']))
@@ -834,7 +838,13 @@ class EADSerializer < ASpaceExport::Serializer
       eadid_url = current_ark
     end
 
-    eadheader_atts = {:findaidstatus => data.finding_aid_status,
+    if @include_unpublished || data.is_finding_aid_status_published
+      finding_aid_status = data.finding_aid_status
+    else
+      finding_aid_status = ""
+    end
+
+    eadheader_atts = {:findaidstatus => finding_aid_status,
                       :repositoryencoding => "iso15511",
                       :countryencoding => "iso3166-1",
                       :dateencoding => "iso8601",

@@ -78,10 +78,31 @@ class FindingAidPDF
       uri_set = entry_set.map(&:uri)
       record_set = archivesspace.search_records(uri_set, {}, true).records
 
-      record_set.zip(entry_set).each do |record, entry|
+
+      unprocessed_record_list = record_set.zip(entry_set)
+      ao_list = []
+
+      # tuple looks like [ArchivalObject, Entry]
+      unprocessed_record_list.each_with_index do |tuple, i|
+        record = tuple[0]
+        next_record = unprocessed_record_list[i + 1][0] rescue nil
+
         next unless record.is_a?(ArchivalObject)
 
-        writer.write(renderer.render_to_string partial: 'archival_object', layout: false, :locals => {:record => record, :level => entry.depth})
+        if next_record && record.uri == next_record.parent_for_md_mapping
+          has_children = true
+        else
+          has_children = false
+        end
+
+        tuple[2] = has_children
+
+        ao_list.push(tuple)
+      end
+
+
+      ao_list.each do |record, entry, is_parent|
+        writer.write(renderer.render_to_string partial: 'archival_object', layout: false, :locals => {:record => record, :level => entry.depth, :is_parent => is_parent})
       end
     end
 
@@ -92,12 +113,36 @@ class FindingAidPDF
   end
 
   def generate
+    java_import com.lowagie.text.pdf.BaseFont;
     out_html = source_file
 
     pdf_file = Tempfile.new
     pdf_file.close
 
     renderer = org.xhtmlrenderer.pdf.ITextRenderer.new
+    resolver = renderer.getFontResolver
+
+    # ANW-1075: Use Kurinto, followed by Noto Serif by defaults for open source compatibility and Unicode support for Latin, Cyrillic and Greek alphabets
+    # Additional fonts can be specified via config file and added via plugin
+
+    if AppConfig[:plugins].include?("custom-pui-pdf-font")
+      font_paths = AppConfig[:pui_pdf_font_files].map do |font|
+        Rails.root.to_s + "/../plugins/custom-pui-pdf-font/public/app/assets/fonts/#{font}"
+      end
+    else
+      font_paths = AppConfig[:pui_pdf_font_files].map do |font|
+        Rails.root.to_s + "/app/assets/fonts/#{font}"
+      end
+    end
+
+    font_paths.each do |font_path|
+      resolver.addFont(
+        font_path,
+        "Identity-H",
+        true
+      );
+    end
+
     renderer.set_document(java.io.File.new(out_html.path))
 
     # FIXME: We'll need to test this with a reverse proxy in front of it.

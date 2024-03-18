@@ -14,6 +14,7 @@ require 'nokogiri'
 require 'axe-rspec'
 require 'jsonmodel'
 
+require_relative '../../indexer/app/lib/pui_indexer'
 require_relative '../../indexer/app/lib/realtime_indexer'
 require_relative '../../indexer/app/lib/periodic_indexer'
 
@@ -85,6 +86,7 @@ RSpec.configure do |config|
     require_relative 'factories'
 
     $indexer = RealtimeIndexer.new(AppConfig[:backend_url], nil)
+    $period = PeriodicIndexer.new($backend, nil, 'periodic_indexer', false)
 
     Factories.init
 

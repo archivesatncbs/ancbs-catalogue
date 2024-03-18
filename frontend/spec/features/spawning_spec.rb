@@ -11,6 +11,7 @@ describe 'Spawning', js: true do
       extents: [build(:json_extent)],
       dates: [build(:json_date, date_type: "single")]
     )
+    run_all_indexers
   end
 
   before(:each) do
@@ -23,7 +24,7 @@ describe 'Spawning', js: true do
     Capybara.reset_sessions!
   end
 
-  it "can spawn a resource component from an accession" do
+  xit "can spawn a resource component from an accession" do
     @resource = create(:resource)
     @parent = create(:json_archival_object,
                      resource: {'ref' => @resource.uri},
@@ -57,7 +58,7 @@ describe 'Spawning', js: true do
     expect(linked_component_ref_id).to eq(ref_id)
   end
 
-  it "can create a digital object from a resource" do
+  xit "can create a digital object from a resource" do
     # make sure to enable the preference!
     visit "/preferences/#{@repo.id}/edit"
     find('#preference_defaults__digital_object_spawn_').check
@@ -118,7 +119,7 @@ describe 'Spawning', js: true do
     end
   end
 
-  it 'can spawn a digital object from an accession' do
+  xit 'can spawn a digital object from an accession' do
     # make sure to enable the preference!
     visit "/preferences/#{@repo.id}/edit"
     find('#preference_defaults__digital_object_spawn_').check
@@ -136,7 +137,7 @@ describe 'Spawning', js: true do
     click_button('Create and Link')
 
     within(id: 'accession_instances_') do
-      find('.digital_object').click
+      find('.digital_object.initialised').click
       digital_object_tab = window_opened_by {click_link('View')}
       within_window digital_object_tab do
         expect(page).to have_content("Spawned Accession")

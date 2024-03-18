@@ -18,6 +18,7 @@ AppConfig[:db_url] = proc { AppConfig.demo_db_url }
 # Set the maximum number of database connections used by the application.
 # Default is derived from the number of indexer threads.
 AppConfig[:db_max_connections] = proc { 20 + (AppConfig[:indexer_thread_count] * 2) }
+AppConfig[:db_pool_timeout] = 5 # number of seconds to wait before raising a PoolTimeout error
 
 # The ArchivesSpace backend listens on port 8089 by default.  You can set it to
 # something else below.
@@ -70,7 +71,7 @@ AppConfig[:db_debug_log] = false
 # Set to true if you have enabled MySQL binary logging
 AppConfig[:mysql_binlog] = false
 
-# add default solr params, i.e. use AND for search: AppConfig[:solr_params] = { 'mm' => '100%' }
+# Add default solr params, i.e. use AND for search: AppConfig[:solr_params] = { 'mm' => '100%' }
 # Another example below sets the boost query value (bq) to boost the relevancy for the query string in the title,
 # sets the phrase fields parameter (pf) to boost the relevancy for the title when the query terms are in close proximity to
 # each other, and sets the phrase slop (ps) parameter for the pf parameter to indicate how close the proximity should be
@@ -80,7 +81,7 @@ AppConfig[:mysql_binlog] = false
 #      "ps" => 0,
 #    }
 # For more information about solr parameters, please consult the solr documentation
-# here: https://lucene.apache.org/solr/
+# here: https://solr.apache.org/guide/solr/latest/query-guide/dismax-query-parser.html
 # Configuring search operator to be AND by default - ANW-427
 AppConfig[:solr_params] = { 'q.op' => 'AND' }
 AppConfig[:solr_verify_checksums] = true
@@ -562,18 +563,18 @@ AppConfig[:pui_email_enabled] = false
 
 # use the repository record email address for requests (overrides config email)
 AppConfig[:pui_request_use_repo_email] = false
-
+AppConfig[:global_email_from_address] = "noreply@yourdomain.com"
 # Example sendmail configuration:
-# AppConfig[:pui_email_delivery_method] = :sendmail
-# AppConfig[:pui_email_sendmail_settings] = {
+# AppConfig[:email_delivery_method] = :sendmail
+# AppConfig[:email_sendmail_settings] = {
 #   location: '/usr/sbin/sendmail',
 #   arguments: '-i'
 # }
-#AppConfig[:pui_email_perform_deliveries] = true
-#AppConfig[:pui_email_raise_delivery_errors] = true
+#AppConfig[:email_perform_deliveries] = true
+#AppConfig[:email_raise_delivery_errors] = true
 # Example SMTP configuration:
-#AppConfig[:pui_email_delivery_method] = :smtp
-#AppConfig[:pui_email_smtp_settings] = {
+#AppConfig[:email_delivery_method] = :smtp
+#AppConfig[:email_smtp_settings] = {
 #      address:              'smtp.gmail.com',
 #      port:                 587,
 #      domain:               'gmail.com',
@@ -582,8 +583,9 @@ AppConfig[:pui_request_use_repo_email] = false
 #      authentication:       'plain',
 #      enable_starttls_auto: true,
 #}
-#AppConfig[:pui_email_perform_deliveries] = true
-#AppConfig[:pui_email_raise_delivery_errors] = true
+#AppConfig[:email_perform_deliveries] = true
+#AppConfig[:email_raise_delivery_errors] = true
+
 
 # Add page actions via the configuration
 AppConfig[:pui_page_custom_actions] = []
@@ -727,3 +729,30 @@ AppConfig[:allow_pui_language_selection] = true
 
 # How repositories should be sorted in the PUI. Options are :display_string or :position
 AppConfig[:pui_repositories_sort] = :display_string
+
+# Set the font used to generate PDFs in the PUI
+AppConfig[:pui_pdf_font_files] = ["KurintoText-Rg.ttf",
+                                  "KurintoText-Bd.ttf",
+                                  "KurintoText-It.ttf",
+                                  "KurintoTextJP-Rg.ttf",
+                                  "KurintoTextJP-Bd.ttf",
+                                  "KurintoTextJP-It.ttf",
+                                  "KurintoTextKR-Rg.ttf",
+                                  "KurintoTextKR-Bd.ttf",
+                                  "KurintoTextKR-It.ttf",
+                                  "KurintoTextSC-Rg.ttf",
+                                  "KurintoTextSC-Bd.ttf",
+                                  "KurintoTextSC-It.ttf",
+                                  "NotoSerif-Regular.ttf",
+                                  "NotoSerif-Bold.ttf",
+                                  "NotoSerif-Italic.ttf"]
+
+AppConfig[:pui_pdf_font_name] = "Kurinto Text,Kurinto Text JP,Kurinto Text KR,Kurinto Text SC,Noto Serif"
+
+
+AppConfig[:pui_pdf_paragraph_line_height] = "125%"
+AppConfig[:pui_pdf_title_line_height] = "140%"
+
+# Password recovery - requires email configuration
+# See example email configuration above
+AppConfig[:allow_password_reset] = false

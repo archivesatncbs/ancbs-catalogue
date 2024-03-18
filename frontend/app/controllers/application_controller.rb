@@ -21,15 +21,17 @@ class ApplicationController < ActionController::Base
   end
 
   # Note: This should be first!
-  before_action :store_user_session
+  before_action :store_user_session, unless: -> { params[:login] && !session[:user] }
 
-  before_action :refresh_permissions
+  before_action :refresh_permissions, unless: -> { params[:login] && !session[:user] }
 
-  before_action :refresh_preferences
+  before_action :refresh_preferences, unless: -> { params[:login] && !session[:user] }
 
-  before_action :load_repository_list
+  before_action :load_repository_list, unless: -> { params[:login] && !session[:user] }
 
   before_action :unauthorised_access
+
+  before_action :init_ancestor_titles
 
   around_action :set_locale
 
@@ -506,6 +508,11 @@ class ApplicationController < ActionController::Base
   def render_aspace_partial(args)
     defaults = {:formats => [:html], :handlers => [:erb]}
     return render(defaults.merge(args))
+  end
+
+
+  def init_ancestor_titles
+    @ancestor_titles = {}
   end
 
 

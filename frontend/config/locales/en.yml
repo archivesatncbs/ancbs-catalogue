@@ -23,6 +23,9 @@ en:
     date_picker: Open Date Picker
     date_picker_toggle: Toggle the Date Picker
     defaults: Default Values
+    drop_before: Drop Before
+    drop_into: Drop as Child
+    drop_after: Drop After
     edit: Edit
     edit_oai: Edit OAI Settings
     edit_batch: Edit Batch
@@ -440,6 +443,26 @@ en:
       asc: Ascending
       desc: Descending
       uri: URI
+      series_level_u_sstr: Series
+      collection_identifier_stored_u_sstr: Collection
+      ils_holding_id: ILS Holding ID
+      exported_to_ils: Exported to ILS
+    top_container_mgmt:
+      resource_accession: Resource/Accession
+      series: Series
+      container_profile: Container Profile
+      type: Type
+      indicator: Indicator
+      barcode: Barcode
+      internal_note: Internal Note
+      location: Location
+      restricted: Restricted
+      not_restricted: Not Restricted
+      ils_holding_id: ILS Holding ID
+      exported_to_ils: Exported to ILS
+      not_exported_to_ils: Not Exported
+      asc: Ascending
+      desc: Descending
     container_profile:
       score: Relevance
       title: Title
@@ -637,8 +660,20 @@ en:
     login_success: Login Successful. Redirecting...
     username_placeholder: Username
     password_placeholder: Password
+    confirm_password: Confirm Password
     username_aria_label: User Name
     password_aria_label: User Password
+    lost_password: Forgot Password?
+    reset_password: Reset Password
+    recover_password: Recover Password
+    email_placeholder: Email Address
+    reset_form_instructions: Enter the email associated with your user account. If an account exists for that email address, a link to reset your password will be sent to that email address.
+    new_password: New Password
+    new_password_instructions: Create a new password for %{user} using the form, then login again.
+    password_mismatch_error: Passwords do not match.
+    password_update_success: Password successfully updated.
+    password_update_error: Password could not be updated. Try again or contact an administrator.
+    password_too_simple: This password is too easy to guess. Try adding words or use a random password generator.
 
   breadcrumb:
     home: Home
@@ -656,6 +691,8 @@ en:
     no_results: No matching results.  Try 'Browse'.
     searching: Searching...
     delete: "&times;"
+    components:
+      browse: Browse Components
 
   mixed_content:
     wrap_prefix: "Wrap with:"
@@ -729,6 +766,7 @@ en:
     merge_denied_relationship: These agents have a relationship. Remove relationship before proceeding with merge.
     merge_restricted_contact_details: The merge cannot be completed because one or more of the agents has contact details you do not have permission to access.
     linked_to_assessment: Record cannot be deleted as it is linked to an assessment
+    linked_to_user: Record cannot be deleted as it is linked to a user
     cannot_delete_repository_agent: This agent is linked to a repository and can't be removed.
 
   component_link:
@@ -1105,9 +1143,14 @@ en:
         add_note: Add Language Note
 
   linked_agent:
+    is_primary: Primary
     _frontend:
       action:
         add: Add Agent Link
+        make_primary_tooltip: |
+            <p>Use to indicate which agent linked to the record is the primary agent. Only one linked agent can be designated as primary.</p> 
+            <p>In the MARCXML export, the primary agent will be the 1XX value.</p> 
+        make_primary: Make Primary
 
   linked_record:
     _frontend:
@@ -1356,6 +1399,10 @@ en:
         deactivated: User deactivated
         error_activate: User not activated
         error_deactivate: User not deactivated
+        password_reset_email_sent: If an account for %{email} exists, an email with instructions for resetting your password will be sent.
+        error_not_found: A username account for %{email} could not be found. Contact your administrator for help.
+        password_reset_not_allowed: Password Recovery is not allowed. Contact your administrator.
+        password_reset_fail: Password Recovery failed. Contact your administrator.
       section:
         manage_access: Manage User Access
         account: Account
@@ -1794,6 +1841,7 @@ en:
     calculate_extent: Calculate Extent
     create_extent_record_message: Run the Extent Calculator in edit mode to have the option of creating an extent record based on the report.
     waiting_for_report_message: Calculating extent ...
+    required_fields_alert_message: Please ensure that all required fields contain a value.
     container_summary_type:
       _singular: container
       _plural: containers
@@ -2499,4 +2547,4 @@ en:
     bulk_import_DO_template_xlsx: Create and link digital objects to existing archival objects in a resource. The XLSX format is for those who have access to Microsoft Excel.
     aspace_location_import_template_csv: Create new location records. Please note that this template is for creating the location records themselves, not linking materials to locations.
     aspace_assessment_import_template_csv: Create and link assessments to existing accessions, resources, archival objects, or digital objects.
-    aspace_subject_import_template_csv: Create new Subject records. Please note that this template is for creating the location records themselves, not linking them to other records.
+    aspace_subject_import_template_csv: Create new Subject records. Please note that this template is for creating the subject records themselves, not linking them to other records.

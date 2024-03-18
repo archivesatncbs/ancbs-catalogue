@@ -684,6 +684,8 @@ fr:
     no_results: Pas de résultats correspondants.  Essayez 'Parcourir'.
     searching: Recherche en cours...
     delete: "&times;"
+    components:
+      browse: Parcourir les composants
 
   mixed_content:
     wrap_prefix: "Mettre en forme avec:"
@@ -765,7 +767,7 @@ fr:
     merge_different_types: Les agents sélectionnés pour la fusion détaillée doivent
       être du même type.
     linked_to_assessment: Notice impossible à supprimer, car liée à une évaluation
-
+    linked_to_user: Notice impossible à supprimer, car liée à un utilisateur
     merge_denied_relationship: Ces agents ont une relation. Supprimez la relation
       avant de procéder à la fusion.
     cannot_delete_repository_agent: Cet agent est lié à un référentiel et ne peut
@@ -1110,9 +1112,15 @@ fr:
     _plural: Langues
 
   linked_agent:
+    is_primary: Primaire
     _frontend:
       action:
         add: Lier à un agent
+        make_primary: Rendre primaire
+        make_primary_tooltip: |
+            <p>Permet d'indiquer quel agent lié à l'enregistrement est l'agent principal. Un seul agent lié peut être désigné comme principal.</p>
+            <p>Dans l'export MARCXML, l'agent principal sera la valeur 1XX.</p>
+    
 
   linked_record:
     _frontend:
@@ -1181,8 +1189,7 @@ fr:
         add: Ajouter forme de nom
         make_authorized: Convertir en nom normatif
         make_display_name: Convertir en nom d'affichage
-        make_primary: Rendre primaire
-
+        
   note:
     _frontend:
       preview:
