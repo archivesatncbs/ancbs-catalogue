@@ -1099,3 +1099,19 @@ span.head {
   position: absolute;
   left: -9999px;
 }
+
+.external-digital-object__content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: var(--bootstrap-horizontal-white-space-unit);
+  border: 1px solid $ancbs-brown;
+  border-radius: var(--bootstrap-rounded-corner-radius);
+  background-color: #fff;
+  text-align: center;
+}
+.external-digital-object__link:hover
+  .external-digital-object__content-container {
+  background-color: $ancbs-white4;
+}
