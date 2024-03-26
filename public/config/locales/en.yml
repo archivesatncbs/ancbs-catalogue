@@ -58,11 +58,10 @@ en:
       <h5><a href="http://archives.ncbs.res.in/sites/default/files/NI-007_0013-0_Access%20and%20Use_Fill.pdf">Researcher Application Form</a> &#x1F58E;<h5>
       <h5><a href="http://archives.ncbs.res.in/sites/default/files/NI-007_0014-1_Material_Use_Form_Fill.pdf">Material Use Form</a> &#x1F58E;</h5>
 
-    search_boosting_message:
-      <h3>Search Boosting</h3>
+    search_boosting_message: <h3>Search Boosting</h3>
       The Archives at NCBS search function supports enhancing your search results by employing certain modifiers.
-      
-      <h4>Standard search</h4> 
+
+      <h4>Standard search</h4>
       A search term is broken up into terms and operators. There are two types of terms - single terms and phrases.
       A single term is a single word such as "letters" or "photo"
       A phrase is a group of words surrounded by double quotes such as "Mysore Sericulture Department"
@@ -75,17 +74,17 @@ en:
       Another special character <code>*</code> matches zero or more sequential characters. For example - the search string <code>artifact*</code> would match <code>artifact</code>, <code>artifacts</code> and <code>artifactual</code>
       <br><br>
       To boost a term use the caret symbol ^ with a boost factor (a number) at the end of the term you are searching. The higher the boost factor, the more relevant the term will be. Boosting allows you to control the relevance of a document by boosting its term. For example, if you are searching for
-      "Bengal floricans" and you want the term "Bengal" to be more relevant, you can boost it by adding the <code>^</code> symbol along with the boost factor immediately after the term. For example, you could type - 
+      "Bengal floricans" and you want the term "Bengal" to be more relevant, you can boost it by adding the <code>^</code> symbol along with the boost factor immediately after the term. For example, you could type -
       <br><code>Bengal^4 floricans</code></br>
       By default, the boost factor is 1. Although the boost factor must be positive, it can be less than 1 (for example, it could be 0.2).
 
       <h5>Fuzzy Searches</h5>
-       Fuzzy searches discover terms that are similar to a specified term without necessarily being an exact match. To perform a fuzzy search, use the tilde <code>~</code> symbol at the end of a single-word term. For example, to search for a term similar in spelling to "roam," use the fuzzy search -
-       <br><code>roam~</code></br>
-       This search will match terms like roams, foam, & foams. It will also match the word "roam" itself.
-       An optional distance parameter specifies the maximum number of edits allowed, between 0 and 2, defaulting to 2. For example -
-       <code><br>roam~1</br></code>
-       This will match terms like <code>roams</code> & <code>foam</code> - but not <code>foams</code> since it has an edit distance of "2"
+      Fuzzy searches discover terms that are similar to a specified term without necessarily being an exact match. To perform a fuzzy search, use the tilde <code>~</code> symbol at the end of a single-word term. For example, to search for a term similar in spelling to "roam," use the fuzzy search -
+      <br><code>roam~</code></br>
+      This search will match terms like roams, foam, & foams. It will also match the word "roam" itself.
+      An optional distance parameter specifies the maximum number of edits allowed, between 0 and 2, defaulting to 2. For example -
+      <code><br>roam~1</br></code>
+      This will match terms like <code>roams</code> & <code>foam</code> - but not <code>foams</code> since it has an edit distance of "2"
 
       <br><br>To learn more about queries, check out our <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html">search function documentation</a>.
 
@@ -427,6 +426,7 @@ en:
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection: Browse %{num} digital objects in collection
+      browse_number_folders_in collection: Browse %{num} folders in collection
 
   subject:
     _singular: Subject
