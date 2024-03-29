@@ -426,7 +426,7 @@ en:
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection: Browse %{num} digital objects in collection
-      browse_number_folders_in collection: Browse %{num} folders in collection
+      browse_number_folders_in_collection: Browse %{num} folders in collection
 
   subject:
     _singular: Subject
