@@ -10,6 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsemenu">
         <ul class="nav nav navbar-nav">
+          <li><a href="<%= AppConfig[:public_proxy_url] %>">Home</a></li>
           <%# TODO: add class="active" if we're on that page %>
           <% $MAIN_MENU.each do |link| %>
             <li><a href="<%= app_prefix(link[0]) %>"><%= t(link[1]) %></a></li>
