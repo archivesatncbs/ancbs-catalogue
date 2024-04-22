@@ -15,13 +15,13 @@
     <div class="col-sm-4 hidden-xs">
       <a href="<%= I18n.t("brand.url").html_safe %>">
         <img class="logo" src="<%= asset_path(AppConfig[:pui_branding_img]) %>" alt="<%= AppConfig[:pui_branding_img_alt_text] %>" />
-      </a>  
+      </a>
     </div>
   -->
   <div class="col-sm-8">
-      <a href="<%= AppConfig[:public_proxy_url] %>">
+      <a href="<%= I18n.t("brand.url").html_safe %>">
         <img class="logo" src="<%= asset_path(AppConfig[:pui_branding_img]) %>" alt="<%= AppConfig[:pui_branding_img_alt_text] %>" />
-      </a>  
+      </a>
   </div>
   <div class="col-sm-4 hidden-xs">
       <!--
