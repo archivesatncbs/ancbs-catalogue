@@ -321,7 +321,7 @@ en:
   subgroups: Subgroups
   accessed: Accessed
   containers: Physical Storage Information
-  related_accessions: Related Unprocessed Material
+  related_accessions: Related Accessions
   related_resources: Related Collections
   linked_instances: Linked Records
   linked_digital_objects: Digital Material
@@ -337,8 +337,8 @@ en:
     _plural: The Archives
 
   accession:
-    _singular: Unprocessed Material
-    _plural: Unprocessed Materials
+    _singular: Accession
+    _plural: Accessions
     _public:
       section:
         acquisition_type: Acquisition Type
@@ -352,7 +352,7 @@ en:
         content_description: Content Description
         inventory: Inventory
       related_accessions:
-        accessions: Related Unprocessed Material
+        accessions: Related Accessions
         deaccessions: Deaccessioned Material
         forms_part_of: Part Relationship
         has_part: Part Relationship
