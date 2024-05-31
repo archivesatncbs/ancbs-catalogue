@@ -139,6 +139,7 @@ en:
       email: Please enter a valid email address
     email:
       subject: "Request for %{title}"
+    explanatory_note: <b>NOTE:</b> This is a request for <b>archival or historical documents</b> from the Archives at NCBS
 
   search-button:
     label: Search

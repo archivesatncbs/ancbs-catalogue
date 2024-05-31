@@ -2,6 +2,7 @@
   <%= render partial: 'shared/request_hiddens' %>
   <div  id="request">
     <div class="form-group required ">
+      <p><%= t('request.explanatory_note').html_safe %></p>
       <%= label_tag(:user_name, "#{t('request.user_name')} #{t('request.required')}" ,  :class => 'sr-only') %>
       <div class="input-group">
         <%= text_field_tag :user_name, nil, :placeholder => t('request.user_name'), :class => "form-control"%>
