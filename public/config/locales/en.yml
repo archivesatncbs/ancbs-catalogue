@@ -276,7 +276,8 @@ en:
     "false": "No"
 
   navbar:
-    search_placeholder: Enter your search terms
+    search_placeholder: Enter your search terms.
+    search_note: Add * to the search term for <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html#wildcard-searches">wildcard search</a>.
     error_no_term: No search term(s) entered.
     toggle_navigation: Toggle Navigation
 
