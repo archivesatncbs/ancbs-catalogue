@@ -35,22 +35,30 @@
 // @import "load-awesome/line-spin-clockwise-fade.css";
 /* stylelint-disable-next-line scss/at-import-no-partial-leading-underscore */
 @import 'foundation/_functions.scss';
+
 // @import 'archivesspace/aspace';
+@import 'ancbs/ancbs';
+
 // @import 'archivesspace/record-type-badge';
-@import 'archivesspace/result-linked-instances';
-@import 'archivesspace/result-representative-file-version';
+@import 'ancbs/record-type-badge';
+
+// @import 'archivesspace/result-linked-instances';
+@import 'ancbs/result-linked-instances';
+
+// @import 'archivesspace/result-representative-file-version';
+@import 'ancbs/result-representative-file-version';
 
 // @import 'archivesspace/infinite-scroll';
+@import 'ancbs/infinite-scroll';
+
 @import 'archivesspace/largetree';
+// @import 'ancbs/largetree';
+
 // @import 'archivesspace/mixed-content';
+@import 'ancbs/mixed-content';
 
 // @import 'archivesspace/helpers.scss';
-
-@import 'archivesspace/print.css';
-
-@import 'ancbs/ancbs';
-@import 'ancbs/record-type-badge';
-@import 'ancbs/infinite-scroll';
-// @import 'ancbs/largetree';
-@import 'ancbs/mixed-content';
 @import 'ancbs/helpers.scss';
+
+// @import 'archivesspace/print.css';
+@import 'ancbs/print.css';
