@@ -36,5 +36,6 @@
   },
   "[scss]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  }
+  },
+  "ruby.rubocop.executePath": "/usr/bin/"
 }
