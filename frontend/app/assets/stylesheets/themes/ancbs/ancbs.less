@@ -42,7 +42,7 @@ body {
 }
 
 .badge {
-  background-color: #463a3a;
+  background-color: @ancbs-deepbrown;
 }
 
 @media print {
@@ -56,66 +56,90 @@ body {
 
 a {
 
-  color: #824141;
+  color: @ancbs-brown;
 
 }
 
 a:hover {
 
-  color: #463a3a;
+  color: @ancbs-deepbrown;
 
 }
+
+.btn-default:hover {
+  background-color: @ancbs-white4;
+  border-color: @ancbs-deepbrown;
+}
+
+.btn-default:active {
+  background-color: @ancbs-white4;
+  border-color: @ancbs-deepbrown;
+}
+
+// .btn-default:focus {
+//   background-color: @ancbs-white4;
+//   border-color: @ancbs-deepbrown;
+// }
+
 .btn-primary {
 
-  background-color: #824141;
-  border-color: #463a3a;
+  background-color: @ancbs-brown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .btn-primary:hover{
 
-  background-color: #463a3a;
-  border-color: #463a3a;
+  background-color: @ancbs-deepbrown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .btn-primary:active {
 
-  background-color: #463a3a;
-  border-color: #463a3a;
+  background-color: @ancbs-deepbrown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .btn-info {
 
-  background-color: #824141;
-  border-color: #463a3a;
+  background-color: @ancbs-brown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .btn-primary:hover {
 
-  background-color: #463a3a;
-  border-color: #463a3a;
+  background-color: @ancbs-deepbrown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .pagination > li > a {
 
-  color: #824141;
+  color: @ancbs-brown;
 
+}
+
+.pagination > li > a:hover {
+
+  background-color: @ancbs-white4;
+  
 } 
+
+
 .pagination > .active > a {
 
-  background-color: #463a3a;
-  border-color: #463a3a;
+  background-color: @ancbs-deepbrown;
+  border-color: @ancbs-deepbrown;
 
 }
 
 .pagination > .active > a:hover {
 
-  background-color: #463a3a;
-  border-color: #463a3a;
+  background-color: @ancbs-deepbrown;
+  border-color: @ancbs-deepbrown;
 
 }
 
@@ -125,3 +149,18 @@ a:hover {
 
 }
 
+.dropdown-menu > li > a:hover {
+
+  background-color: @ancbs-white4;
+
+}
+
+.alert, .alert-info {
+  background-color: @ancbs-white4;
+  border-color: @ancbs-deepbrown;
+  color: @ancbs-deepbrown;
+}
+
+.label-info {
+  background-color: @ancbs-deepbrown;
+}
