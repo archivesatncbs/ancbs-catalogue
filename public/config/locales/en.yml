@@ -27,7 +27,7 @@ en:
     welcome_head: Welcome to the online catalogue of Archives at NCBS
     welcome_message: |
       <h3>About</h3>
-      <p>The Archives at NCBS is a public collecting centre for the history of science in contemporary India. The Archives is free and open to the public. It is located in a 2000 square feet space in the Eastern Lab Complex (ELC) basement in NCBS, a space that was formerly occupied by Obaid Siddiqi, the co-founder of NCBS, and his laboratory. It includes space for research, processing, exhibitions, recording, and a leading-edge storage facility with monitors for temperature, light, humidity, air quality, water, fire, pests, and noise. The publicly accessible catalogue of 150,000 objects spans 25 collections and in various forms, ranging from paper-based manuscripts to negatives to photographs, books, fine art, audio recordings, scientific equipment, letters, and field and lab notes. The reading rooms are open to the public and researchers without prior appointment. However, you may need an appointment to review the archival holdings</p>
+      <p>The Archives at NCBS is a public centre for the history of science in contemporary India. Over 250,000 processed objects across 50+ collections are in various forms, ranging from paper-based manuscripts to negatives to photographs, books, fine art, audio recordings, scientific equipment, letters, and field and lab notes. The 2000-square-feet state-of-the-art physical centre at NCBS includes space for research, processing, exhibitions, recording, and a leading-edge storage facility with monitors for temperature, light, humidity, air quality, water, fire, pests, and noise. The holdings include the papers of the ornithologist, Ravi Sankaran, and the molecular biologist and co-founder of NCBS, Obaid Siddiqi. They include papers of TSG Sastry, a physicist who worked on the Thumba rocket programme, Leslie Coleman, an early 20th century agricultural scientist in Mysore state, and the renowned agricultural scientist, MS Swaminathan. The Archives has one underlying philosophy—of enabling diverse stories—and operates on four broad verticals. One is to strengthen research collections and access in the history of science in contemporary India. The second is to push the frontiers of research in archival sciences in India, forging intersections with scholarship in law, ethics, information theory and the semantic web, for instance. The third is to build capacity and public awareness through education, training and programming, from high school to professional practice. And the fourth: to reimagine the archives as part of the commons through vibrant public engagement. The Obaid Siddiqi Chair in the History and Culture of Science is generously supported by TNQ Technologies. And much of the work of the Archives at NCBS is supported by TNQ Technologies and Arcadia. The reading rooms are open to the public and researchers without prior appointment. However, you may need an appointment to review the archival holdings. For queries, please visit <a href="https://archives.ncbs.res.in/contact">contact us</a></p>
 
     welcome_page_title: Catalogue
     access_url: https://archives.ncbs.res.in/access
@@ -35,19 +35,19 @@ en:
       <h3>Access</h3>
       <p>Most collections at the Archives at NCBS are described at the level of file/folder. All folder-level descriptions at the Archives at NCBS follow a standard naming convention, and this is indicated in the field titled <em>Identifier</em> in the catalogue.
 
-      For instance, refer to the identifier, MS-007-2-2-10-7 for the file on <a href="http://catalogue.archives.ncbs.res.in/repositories/2/archival_objects/5364">correspondence between MS Swaminathan and BM Pal on 23 December 1957 and 31 December 1957</a>. Here is the naming convention breakdown:
+      For instance, refer to the identifier, MS-012-1-1-1-7 for the file on <a href="http://catalogue.archives.ncbs.res.in/repositories/2/archival_objects/9734">correspondence between MB Krishna Rao and Leslie Coleman on April 4, 1952</a>. We share the naming convention below to help researchers understand records at the Archives at NCBS. But this knowledge is not necessary to make requests!
       <br><br>
-      <b>MS-007-2-2-10-7</b>
+      <b>MS-012-1-1-1-7</b>
       <br>
       <b>MS</b> : Manuscripts
       <br>
-      <b>007</b> : 7th manuscript collection at Archives at NCBS
+      <b>012</b> : 12th manuscript collection at Archives at NCBS - Leslie Coleman Papers
       <br>
-      <b>2</b> : Series number (Correspondence)
+      <b>1</b> : Series number (Correspondence)
       <br>
-      <b>2</b> : Sub-series number (1954-1972)
+      <b>1</b> : Sub-series number (Letters to Leslie Coleman)
       <br>
-      <b>10</b> : Box or container number or location
+      <b>1</b> : Box or container number or location
       <br>
       <b>7</b> : Folder or sub-container number
       <br><br>
@@ -86,7 +86,7 @@ en:
       <code><br>roam~1</br></code>
       This will match terms like <code>roams</code> & <code>foam</code> - but not <code>foams</code> since it has an edit distance of "2"
 
-      <br><br>To learn more about queries, check out our <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html">search function documentation</a>.
+      <br><br>To learn more about queries, check out <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html">Solr documentation</a>.
 
     collections_url: https://collections.archives.ncbs.res.in
     url: https://archives.ncbs.res.in
