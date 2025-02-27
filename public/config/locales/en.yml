@@ -21,12 +21,77 @@
 
 en:
   brand:
-    title: ArchivesSpace Public Interface
-    title_link_text: Return to the ArchivesSpace homepage
-    welcome_head: Welcome to ArchivesSpace
+    title: Archives at NCBS
+    title_link_text: Return to the Archives at NCBS catalogue homepage
+    start_year: 2019
+    welcome_head: Welcome to the online catalogue of Archives at NCBS
     welcome_message: |
-      <p>Search across our collections, digital materials, and more.</p>
-    welcome_page_title: ArchivesSpace Public Interface
+      <h3>About</h3>
+      <p>The Archives at NCBS is a public centre for the history of science in contemporary India. Over 250,000 processed objects across 50+ collections are in various forms, ranging from paper-based manuscripts to negatives to photographs, books, fine art, audio recordings, scientific equipment, letters, and field and lab notes. The 2000-square-feet state-of-the-art physical centre at NCBS includes space for research, processing, exhibitions, recording, and a leading-edge storage facility with monitors for temperature, light, humidity, air quality, water, fire, pests, and noise. The holdings include the papers of the ornithologist, Ravi Sankaran, and the molecular biologist and co-founder of NCBS, Obaid Siddiqi. They include papers of TSG Sastry, a physicist who worked on the Thumba rocket programme, Leslie Coleman, an early 20th century agricultural scientist in Mysore state, and the renowned agricultural scientist, MS Swaminathan. The Archives has one underlying philosophy—of enabling diverse stories—and operates on four broad verticals. One is to strengthen research collections and access in the history of science in contemporary India. The second is to push the frontiers of research in archival sciences in India, forging intersections with scholarship in law, ethics, information theory and the semantic web, for instance. The third is to build capacity and public awareness through education, training and programming, from high school to professional practice. And the fourth: to reimagine the archives as part of the commons through vibrant public engagement. The Obaid Siddiqi Chair in the History and Culture of Science is generously supported by TNQ Technologies. And much of the work of the Archives at NCBS is supported by TNQ Technologies and Arcadia. The reading rooms are open to the public and researchers without prior appointment. However, you may need an appointment to review the archival holdings. For queries, please visit <a href="https://archives.ncbs.res.in/contact">contact us</a></p>
+
+    welcome_page_title: Catalogue
+    access_url: https://archives.ncbs.res.in/access
+    access_message: |
+      <h3>Access</h3>
+      <p>Most collections at the Archives at NCBS are described at the level of file/folder. All folder-level descriptions at the Archives at NCBS follow a standard naming convention, and this is indicated in the field titled <b>Identifier</b> in the catalogue.
+      <br>
+      For instance, refer to the identifier, MS-012-1-1-1-7 for the file on <a href="http://catalogue.archives.ncbs.res.in/repositories/2/archival_objects/9734">correspondence between MB Krishna Rao and Leslie Coleman on April 4, 1952</a>. We share the naming convention below to help researchers understand records at the Archives at NCBS. But this knowledge is not necessary to make requests!
+      <br><br>
+      <b>MS-012-1-1-1-7</b>
+      <br>
+      <b>MS</b> : Manuscripts
+      <br>
+      <b>012</b> : 12th manuscript collection at Archives at NCBS - Leslie Coleman Papers
+      <br>
+      <b>1</b> : Series number (Correspondence)
+      <br>
+      <b>1</b> : Sub-series number (Letters to Leslie Coleman)
+      <br>
+      <b>1</b> : Box or container number or location
+      <br>
+      <b>7</b> : Folder or sub-container number
+      <br><br>
+
+      The Archives at NCBS is only providing this information to help researchers understand the naming convention across the collections. Researchers using the archives only need to submit the full identifier in the <b>Researcher Application Form</b> or the <b>Material Use Form</b> outlined in the Resources section.
+
+      <h3>Resources</h3>
+      <h5><a href="https://collections.archives.ncbs.res.in/bitstreams/c4f7ff66-c5b2-4134-968d-d066dc41c1b9/download">Researcher Application Form</a> &#x1F58E;<h5>
+      <h5><a href="https://collections.archives.ncbs.res.in/bitstreams/d2a62180-6c5e-4414-b93c-3c8b1ab9db32/download">Material Use Form</a> &#x1F58E;</h5>
+
+    search_boosting_message: <h3>Search Boosting</h3>
+      The Archives at NCBS search function supports enhancing your search results by employing certain modifiers.
+      <br><br>
+      <h4>Standard search</h4>
+      A search term is broken up into terms and operators. There are two types of terms - single terms and phrases.
+      A single term is a single word such as "letters" or "photo"
+      A phrase is a group of words surrounded by double quotes such as "Mysore Sericulture Department"
+      <br><br>
+      <h4>Term Modifiers</h4>
+      <h5>Wildcard search</h5>
+      The search function supports single and multiple character wildcard searches within single terms. Wildcard characters can be applied to single terms, but not to search phrases.
+      The special character <code>?</code> matches a single character. For example - the search string <code>art?fact</code> would match both <code>artifact</code> and <code>artefact</code>.
+      Another special character <code>*</code> matches zero or more sequential characters. For example - the search string <code>artifact*</code> would match <code>artifact</code>, <code>artifacts</code> and <code>artifactual</code>
+      <br><br>
+      To boost a term use the caret symbol <code>^</code> with a boost factor at the end of the term you are searching. The higher the boost factor, the more relevant the term will be. Boosting allows you to control the relevance of a document by boosting its term. For example, if you are searching for
+      "Bengal floricans" and you want the term "Bengal" to be more relevant, you can boost it by adding the <code>^</code> symbol along with the boost factor immediately after the term. For example, you could type <code>Bengal^4 floricans</code>
+      <br><br>
+      By default, the boost factor is 1. Although the boost factor must be positive, it can be less than 1 (for example, it could be 0.2).
+      <br><br>
+      <h5>Fuzzy Searches</h5>
+      Fuzzy searches discover terms that are similar to a specified term without necessarily being an exact match. To perform a fuzzy search, use the tilde <code>~</code> symbol at the end of a single-word term. 
+      <br><br>
+      For example, to search for a term similar in spelling to "roam," use the fuzzy search term
+      <code>roam~</code>
+      <br>
+      This search will match terms like "roams", "foam", & "foams". It will also match the word "roam" itself. 
+      <br><br>
+      An optional distance parameter specifies the maximum number of edits allowed, between 0 and 2, defaulting to 2. For example,
+      <code>roam~1</code>
+      This will match terms like <code>roams</code> & <code>foam</code> but not <code>foams</code> since it has an edit distance of "2"
+      <br><br>To learn more about queries, check out <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html">Solr documentation</a>.
+
+    collections_url: https://collections.archives.ncbs.res.in
+    url: https://archives.ncbs.res.in
 
   actions:
     search: Search
@@ -75,6 +140,7 @@ en:
       email: Please enter a valid email address
     email:
       subject: "Request for %{title}"
+    explanatory_note: <b>NOTE:</b> This is a request for <b>archival or historical documents</b> from the Archives at NCBS.
 
   search-button:
     label: Search
@@ -224,6 +290,7 @@ en:
     search_placeholder: Enter your search terms
     error_no_term: No search term(s) entered.
     toggle_navigation: Toggle Navigation
+    search_note: Add * to the search term for <a href='#'>wildcard search</a>.
 
   navigation:
     hierarchical: hierarchical navigation
@@ -284,8 +351,8 @@ en:
     _plural: The Archives
 
   accession:
-    _singular: Unprocessed Material
-    _plural: Unprocessed Materials
+    _singular: Accession
+    _plural: Accessions
     _public:
       section:
         acquisition_type: Acquisition Type
@@ -372,13 +439,13 @@ en:
     restricted: Restricted
 
   digital_object:
-    _singular: Digital Record
-    _plural: Digital Materials
+    _singular: Digital Object
+    _plural: Digital Objects
     _public:
       thumbnail: thumbnail
       link: Link to digital object
       badge_label: Digital %{level}
-      go: Go to file
+      go: Go to digital object
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection:

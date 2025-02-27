@@ -16,9 +16,13 @@
 
 // Adding these first so they can override bootstrap variables.
 // See: https://stackoverflow.com/questions/11773583/can-i-override-sass-variables-after-they-have-been-imported
-@import 'archivesspace/fonts';
-@import 'archivesspace/colors';
-@import 'archivesspace/variables';
+// @import 'archivesspace/fonts';
+// @import 'archivesspace/colors';
+// @import 'archivesspace/variables';
+@import 'ancbs/fonts';
+@import 'ancbs/colors';
+@import 'ancbs/variables';
+
 
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'archivesspace/bootstrap-overrides';
@@ -27,17 +31,17 @@
 
 /* stylelint-disable-next-line scss/at-import-no-partial-leading-underscore */
 @import 'foundation/_functions.scss';
-@import 'archivesspace/aspace';
-@import 'archivesspace/record-type-badge';
-@import 'archivesspace/result-linked-instances';
-@import 'archivesspace/result-representative-file-version';
+@import 'ancbs/ancbs';
+@import 'ancbs/record-type-badge';
+@import 'ancbs/result-linked-instances';
+@import 'ancbs/result-representative-file-version';
 
-@import 'archivesspace/infinite-records';
-@import 'archivesspace/infinite-tree';
+@import 'ancbs/infinite-records';
+@import 'ancbs/infinite-tree';
 @import 'archivesspace/largetree';
-@import 'archivesspace/mixed-content';
-@import 'archivesspace/read-more-notes';
+@import 'ancbs/mixed-content';
+@import 'ancbs/read-more-notes';
 
-@import 'archivesspace/helpers.scss';
+@import 'ancbs/helpers.scss';
 
-@import 'archivesspace/print.css';
+@import 'ancbs/print.css';

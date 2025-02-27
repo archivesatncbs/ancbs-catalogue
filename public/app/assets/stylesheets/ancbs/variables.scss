@@ -1,0 +1,15 @@
+$theme-colors: (
+  'primary': #824141,
+);
+
+$sans-font: 'Noto Sans', 'PT Sans', 'Helvetica Neue', helvetica, arial, sans-serif;
+$serif-font: 'Noto Serif','Roboto Slab', serif;
+$font-family-serif: $serif-font;
+$font-family-sans-serif: $sans-font;
+
+$text-color: $darkest;
+$input-color-placeholder: #767676;
+
+$fi-path: 'foundation-icon-fonts';
+
+$row-width: 100%;
