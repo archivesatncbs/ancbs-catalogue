@@ -88,7 +88,7 @@ en:
       An optional distance parameter specifies the maximum number of edits allowed, between 0 and 2, defaulting to 2. For example,
       <code>roam~1</code>
       This will match terms like <code>roams</code> & <code>foam</code> but not <code>foams</code> since it has an edit distance of "2"
-      <br><br>To learn more about queries, check out <a href="https://solr.apache.org/guide/8_11/the-standard-query-parser.html">Solr documentation</a>.
+      <br><br>To learn more about queries, check out <a href="https://solr.apache.org/guide/solr/9_4/query-guide/standard-query-parser.html">Solr documentation</a>.
 
     collections_url: https://collections.archives.ncbs.res.in
     url: https://archives.ncbs.res.in
@@ -290,7 +290,7 @@ en:
     search_placeholder: Enter your search terms
     error_no_term: No search term(s) entered.
     toggle_navigation: Toggle Navigation
-    search_note: Add * to the search term for <a href='#'>wildcard search</a>.
+    search_note: Add * to the search term for wildcard search.
 
   navigation:
     hierarchical: hierarchical navigation
