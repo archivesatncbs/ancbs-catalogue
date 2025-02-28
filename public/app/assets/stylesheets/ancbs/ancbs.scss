@@ -99,7 +99,7 @@ a img {
   margin-right: 0;
   background-color: $primary-color;
   color: $white;
-  border-radius: 0;
+  border-radius: 0.25rem;
 }
 
 .tabbing.nav-pills > li > a:hover {
@@ -107,13 +107,20 @@ a img {
 }
 
 .tabbing.nav-pills > li:first-child a {
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
+  // border-top-left-radius: 40px;
+  // border-bottom-left-radius: 40px;
 }
 .tabbing.nav-pills > li:last-child a {
-  border-top-right-radius: 40px;
-  border-bottom-right-radius: 40px;
+  // border-top-right-radius: 40px;
+  // border-bottom-right-radius: 40px;
 }
+
+.tabbing.nav-pills > .nav-item {
+  width: 210px;
+  border-color: $ancbs-deepbrown;
+  margin: 2px;
+}
+
 
 .tabbing.nav-pills > li > a.active {
   background-color: $accent-color;
@@ -624,6 +631,11 @@ button.subject {
 .page_action:focus {
   color: $accent_color;
   background-color: $light-neutral;
+}
+
+.page-item.active .page-link {
+  background-color: $ancbs-deepbrown;
+  border-color: $ancbs-deepbrown;
 }
 
 .top_container {
