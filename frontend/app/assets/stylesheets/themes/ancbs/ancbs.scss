@@ -1,0 +1,67 @@
+
+a {
+    color: $ancbs-brown;
+}
+
+a:hover {
+    color: $ancbs-deepbrown;
+}
+
+.alert-info{
+    color:$ancbs-brown;
+    background-color: $ancbs-white4;
+    border-color: $ancbs-deepbrown;
+}
+
+.as-nav-list > li > a.active{
+    background-color: $ancbs-deepbrown;
+}
+
+.badge {
+    background-color: $ancbs-deepbrown;
+    color: white;
+}
+
+.btn-primary {
+    background-color: $ancbs-brown;
+    border-color: $ancbs-brown;
+}
+
+.btn-primary:hover {
+    background-color: $ancbs-deepbrown;
+    border-color: $ancbs-deepbrown;
+}
+
+.largetree-container .current td, 
+.largetree-container .current .table-cell {
+    background-color: $ancbs-white4;
+}
+
+.page-link {
+    color: $ancbs-brown;
+}
+
+.page-link:hover {
+    color: $ancbs-deepbrown;
+}
+
+.page-item.active .page-link {
+    background-color: $ancbs-deepbrown;
+    border-color: $ancbs-deepbrown;
+}
+
+
+table.table-sortable thead th.sort-asc {
+    background-image: linear-gradient(to bottom, $ancbs-white1, $ancbs-white4);
+}
+
+.token {
+    background-color: $ancbs-brown;
+    background-image: linear-gradient(to bottom, $ancbs-deepbrown 0%, $ancbs-brown 100%);
+}
+
+// .token:hover {
+//     background-image: linear-gradient(to bottom, $ancbs-white4, $ancbs-white4);
+// }
+
+  
