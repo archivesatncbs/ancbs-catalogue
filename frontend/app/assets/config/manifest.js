@@ -12,3 +12,4 @@
 //= link codemirror/util/simple-hint.js
 //= link tablesorter/jquery.tablesorter.min.js
 //= link largetree.js
+//= link ancbs/largetree.css

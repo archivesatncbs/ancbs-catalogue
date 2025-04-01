@@ -71,8 +71,13 @@
     }
   };
 </script>
+<% frontend_theme = AppConfig[:frontend_theme] %>
 
-<%= stylesheet_link_tag "archivesspace/largetree" %>
+<% if frontend_theme == "default" %>
+    <% frontend_theme = "archivesspace"%>
+<% end %>
+
+<%= stylesheet_link_tag frontend_theme+"/largetree" %>
 <%= javascript_include_tag "tree" %>
 
 <script>
