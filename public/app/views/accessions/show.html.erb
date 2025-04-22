@@ -26,6 +26,21 @@
     <p><%= @result.content_description %></p>
   <% end %>
 
+  <% if @result.condition_description %>
+    <h2><%= t('accession._public.section.condition_description') %></h2>
+    <p><%= @result.condition_description %></p>
+  <% end %>
+
+  <% if @result.accession_date %>
+    <h2><%= t('accession._public.section.accession_date') %></h2>
+    <p><%= @result.accession_date %></p>
+  <% end %>
+
+  <% if @result.disposition %>
+    <h2><%= t('accession._public.section.dispostion') %></h2>
+    <p><%= @result.disposition %></p>
+  <% end %>
+
   <% if @result.acquisition_type %>
     <h2><%= t('accession._public.section.acquisition_type') %></h2>
     <p><%= @result.acquisition_type %></p>
@@ -34,6 +49,11 @@
   <% if @result.provenance %>
     <h2><%= t('accession._public.section.provenance') %></h2>
     <p><%= @result.provenance %></p>
+  <% end %>
+
+  <% if @result.retention_rule %>
+    <h2><%= t('accession._public.section.retention_rule') %></h2>
+    <p><%= @result.retention_rule %></p>
   <% end %>
 
   <% if @result.language %>

@@ -13,6 +13,10 @@ class Accession < Record
     @access_restrictions_note = json['access_restrictions_note']
   end
 
+  def accession_date
+    json['accession_date']
+  end
+
   def acquisition_type
     if json['acquisition_type']
       I18n.t("enumerations.accession_acquisition_type.#{json['acquisition_type']}", :default => json['acquisition_type'])
@@ -28,12 +32,24 @@ class Accession < Record
     json['content_description']
   end
 
+  def condition_description
+    json['condition_description']
+  end
+
+  def disposition
+    json['disposition']
+  end
+
   def inventory
     json['inventory']
   end
 
   def provenance
     json['provenance']
+  end
+
+  def retention_rule
+    json['retention_rule']
   end
 
   def language
