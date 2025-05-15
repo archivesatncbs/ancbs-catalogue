@@ -275,19 +275,21 @@ describe SearchController, type: :controller do
 
         results = controller.instance_variable_get(:@results)
 
+        expected_highlights_hash = {
+          "title" => ["<span class=\"searchterm\">Resource</span> <span class=\"searchterm\">Title</span> <span class=\"searchterm\">#{now}</span>"],
+          "title_ws" => ["<span class=\"searchterm\">Resource</span> <span class=\"searchterm\">Title</span> <span class=\"searchterm\">#{now}</span>"]
+        }
+
         expect(results['total_hits']).to eq 1
         expect(results['highlighting']).to eq(
           {
-            "/repositories/#{repository.id}/resources/#{resource.id}" => {
-              "title" => ["<span class=\"searchterm\">Resource</span> <span class=\"searchterm\">Title</span> <span class=\"searchterm\">#{now}</span>"],
-              "title_ws" => ["<span class=\"searchterm\">Resource</span> <span class=\"searchterm\">Title</span> <span class=\"searchterm\">#{now}</span>"]
-            }
+            "/repositories/#{repository.id}/resources/#{resource.id}" => expected_highlights_hash
           }
         )
 
         expect(results.records.length).to eq 1
         record = results.records[0]
-        expect(record.highlights).to eq({})
+        expect(record.highlights).to eq(expected_highlights_hash)
         expect(record.display_string).to eq "<span class=\"searchterm\">Resource</span> <span class=\"searchterm\">Title</span> <span class=\"searchterm\">#{now}</span>"
       end
     end
@@ -346,66 +348,76 @@ describe SearchController, type: :controller do
 
         results = controller.instance_variable_get(:@results)
 
-        expect(results['total_hits']).to eq 5
-        expect(results['highlighting']).to eq(
-          {
-            "/repositories/#{repository.id}/accessions/#{accession.id}" => {
-              "title"=>["Accession Title <span class=\"searchterm\">#{now}</span>"],
-              "title_ws"=>["Accession Title <span class=\"searchterm\">#{now}</span>"]
-            },
-            "/repositories/#{repository.id}/resources/#{resource.id}" => {
-              "title"=>["Resource Title <span class=\"searchterm\">#{now}</span>"],
-              "title_ws"=>["Resource Title <span class=\"searchterm\">#{now}</span>"],
-              "identifier_ws" => ["id_0 #{now}-with spaces <span class=\"searchterm\">#{now}</span>"],
-              "four_part_id" => ["id_0 <span class=\"searchterm\">#{now}</span> with spaces <span class=\"searchterm\">#{now}</span>"],
-              "creators_text" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
-              "agents_text" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
-              "notes_published"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
-              "notes"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
-              "summary"=>["Note text <span class=\"searchterm\">#{now}</span>\nUnpublished note text <span class=\"searchterm\">#{now}</span>"]
-            },
-            "/agents/people/#{linked_agent_1.id}" => {
-              "title" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
-              "title_ws" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"]
-            },
-            "/agents/people/#{linked_agent_2.id}" => {
-              "title" => ["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"],
-              "title_ws" => ["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"]
-            },
-            "/repositories/#{repository.id}/digital_objects/#{digital_object.id}" => {
-              "title"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"],
-              "title_ws"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"]
-            }
-          }
-        )
+        expected_accession_highlights_hash = {
+          "title"=>["Accession Title <span class=\"searchterm\">#{now}</span>"],
+          "title_ws"=>["Accession Title <span class=\"searchterm\">#{now}</span>"]
+        }
 
-        expect(results.records.length).to eq 5
+        aggregate_failures do
+          expect(results['total_hits']).to eq 5
+          expect(results['highlighting']).to eq(
+                                               {
+                                                 "/repositories/#{repository.id}/accessions/#{accession.id}" => expected_accession_highlights_hash,
+                                                 "/repositories/#{repository.id}/resources/#{resource.id}" => {
+                                                   "title"=>["Resource Title <span class=\"searchterm\">#{now}</span>"],
+                                                   "title_ws"=>["Resource Title <span class=\"searchterm\">#{now}</span>"],
+                                                   "identifier_ws" => ["id_0 #{now}-with spaces <span class=\"searchterm\">#{now}</span>"],
+                                                   "four_part_id" => ["id_0 <span class=\"searchterm\">#{now}</span> with spaces <span class=\"searchterm\">#{now}</span>"],
+                                                   "creators_text" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
+                                                   "agents_text" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
+                                                   "notes_published"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
+                                                   "notes"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
+                                                   "summary"=>["Note text <span class=\"searchterm\">#{now}</span>\nUnpublished note text <span class=\"searchterm\">#{now}</span>"]
+                                                 },
+                                                 "/agents/people/#{linked_agent_1.id}" => {
+                                                   "title" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
+                                                   "title_ws" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"]
+                                                 },
+                                                 "/agents/people/#{linked_agent_2.id}" => {
+                                                   "title" => ["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"],
+                                                   "title_ws" => ["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"]
+                                                 },
+                                                 "/repositories/#{repository.id}/digital_objects/#{digital_object.id}" => {
+                                                   "title"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"],
+                                                   "title_ws"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"]
+                                                 }
+                                               }
+                                             )
 
-        accession_record = results.records[0]
-        expect(accession_record.display_string).to eq "Accession Title <span class=\"searchterm\">#{now}</span>"
-        expect(accession_record.highlights).to eq({})
+          expect(results.records.length).to eq 5
 
-        resource_record = results.records[1]
-        expect(resource_record.display_string).to eq "Resource Title <span class=\"searchterm\">#{now}</span>"
-        expect(resource_record.highlights).to eq(
-          {
-            "creators_text"=>["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
-            "notes_published"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
-            "four_part_id"=>["id_0 <span class=\"searchterm\">#{now}</span> with spaces <span class=\"searchterm\">#{now}</span>"]
-          }
-        )
+          accession_record = results.records[0]
+          expect(accession_record.display_string).to eq "Accession Title <span class=\"searchterm\">#{now}</span>"
+          expect(accession_record.highlights).to eq(expected_accession_highlights_hash)
 
-        agent_1_record = results.records[2]
-        expect(agent_1_record.display_string).to eq "Linked Agent 1 <span class=\"searchterm\">#{now}</span>"
-        expect(agent_1_record.highlights).to eq({})
+          resource_record = results.records[1]
+          expect(resource_record.display_string).to eq "Resource Title <span class=\"searchterm\">#{now}</span>"
+          expect(resource_record.highlights).to eq(
+                                                  {
+                                                    "agents_text" => ["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
+                                                    "creators_text"=>["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"],
+                                                    "identifier_ws" => ["id_0 #{now}-with spaces <span class=\"searchterm\">#{now}</span>"],
+                                                    "notes" => ["", "Note text <span class=\"searchterm\">#{now}</span>"],
+                                                    "notes_published"=>["", "Note text <span class=\"searchterm\">#{now}</span>"],
+                                                    "summary" => ["Note text <span class=\"searchterm\">#{now}</span>\nUnpublished note text <span class=\"searchterm\">#{now}</span>"],
+                                                    "title" => ["Resource Title <span class=\"searchterm\">#{now}</span>"],
+                                                    "title_ws" => ["Resource Title <span class=\"searchterm\">#{now}</span>"],
+                                                    "four_part_id"=>["id_0 <span class=\"searchterm\">#{now}</span> with spaces <span class=\"searchterm\">#{now}</span>"]
+                                                  }
+                                                )
 
-        agent_2_record = results.records[3]
-        expect(agent_2_record.display_string).to eq "Linked Agent 2 <span class=\"searchterm\">#{now}</span>"
-        expect(agent_2_record.highlights).to eq({})
+          agent_1_record = results.records[2]
+          expect(agent_1_record.display_string).to eq "Linked Agent 1 <span class=\"searchterm\">#{now}</span>"
+          expect(agent_1_record.highlights).to eq({"title"=>["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"], "title_ws"=>["Linked Agent 1 <span class=\"searchterm\">#{now}</span>"]})
 
-        digital_object_record = results.records[4]
-        expect(digital_object_record.display_string).to eq "Digital Object Title <span class=\"searchterm\">#{now}</span>"
-        expect(digital_object_record.highlights).to eq({})
+          agent_2_record = results.records[3]
+          expect(agent_2_record.display_string).to eq "Linked Agent 2 <span class=\"searchterm\">#{now}</span>"
+          expect(agent_2_record.highlights).to eq({"title"=>["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"], "title_ws"=>["Linked Agent 2 <span class=\"searchterm\">#{now}</span>"]} )
+
+          digital_object_record = results.records[4]
+          expect(digital_object_record.display_string).to eq "Digital Object Title <span class=\"searchterm\">#{now}</span>"
+          expect(digital_object_record.highlights).to eq({"title"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"], "title_ws"=>["Digital Object Title <span class=\"searchterm\">#{now}</span>"]} )
+        end
       end
     end
 
@@ -451,6 +463,73 @@ describe SearchController, type: :controller do
         expect(record.display_string).to eq "Resource Title #{now}"
         expect(record.highlights).to eq({})
       end
+    end
+  end
+
+  describe 'default search scope configuration' do
+    before(:each) do
+      # Store original config to restore it after tests
+      @original_default_scope = AppConfig[:search_default_scope]
+    end
+
+    after(:each) do
+      # Restore original config
+      AppConfig[:search_default_scope] = @original_default_scope
+    end
+
+    it 'should use all_record_types by default when config is set to all_record_types' do
+      AppConfig[:search_default_scope] = 'all_record_types'
+
+      response = get(:search, params: {
+        :q => ['*'],
+        :op => ['OR'],
+        :field => ['']
+      })
+
+      expect(response).to have_http_status(200)
+      expect(controller.params[:limit]).to be_blank
+    end
+
+    it 'should use collections_only by default when config is set to collections_only' do
+      AppConfig[:search_default_scope] = 'collections_only'
+
+      response = get(:search, params: {
+        :q => ['*'],
+        :op => ['OR'],
+        :field => ['']
+      })
+
+      expect(response).to have_http_status(200)
+      expect(controller.params[:limit]).to eq('resource')
+    end
+
+    it 'should respect user selection when explicitly choosing all_record_types' do
+      AppConfig[:search_default_scope] = 'collections_only'
+
+      # Send an empty string for limit to simulate selecting "All Records"
+      response = get(:search, params: {
+        :q => ['*'],
+        :op => ['OR'],
+        :field => [''],
+        :limit => ''
+      })
+
+      expect(response).to have_http_status(200)
+      expect(controller.params[:limit]).to eq('')
+    end
+
+    it 'should respect user selection when explicitly choosing collections_only' do
+      AppConfig[:search_default_scope] = 'all_record_types'
+
+      response = get(:search, params: {
+        :q => ['*'],
+        :op => ['OR'],
+        :field => [''],
+        :limit => 'resource'
+      })
+
+      expect(response).to have_http_status(200)
+      expect(controller.params[:limit]).to eq('resource')
     end
   end
 end

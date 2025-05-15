@@ -30,7 +30,7 @@ span.title {
 }
 
 li {
-  list-style-type: none;    
+  list-style-type: none;
   position: relative;
 }
 
@@ -46,7 +46,7 @@ li::before {
      width: 100%;
      height: 250px;
      background-repeat: no-repeat;
-     background-size: 100% auto; 
+     background-size: 100% auto;
      background-origin: content-box;
      background-position: 50% 50%;
  }
@@ -93,7 +93,7 @@ li::before {
  }
  .ao-summary a.record-title {
      color: black;
-     font-weight: normal; 
+     font-weight: normal;
      font-size: 100%;
  }
 
@@ -135,7 +135,7 @@ li::before {
 
  table.collection-inventory-header {
     background-color: #fafafa;
-    font-weight: bold;  
+    font-weight: bold;
     width: 102%;
     margin-top: 20px;
     margin-bottom: -10px;
@@ -168,7 +168,7 @@ li::before {
 
  .title-block {
      /* border-bottom: solid 2px black; */
- } 
+ }
 
  div.bioghist dl {
     width: 800px;
@@ -288,7 +288,7 @@ li::before {
 
  .print-record-border a.record-title {
      color: black;
-     font-weight: normal; 
+     font-weight: normal;
  }
 
  .box-area {
@@ -376,7 +376,7 @@ li::before {
 
         </style>
         <% ASUtils.find_local_directories('public/views/_pdf_header.html.erb').each do |template| %>
-            <%= render(:inline => File.read(template), :locals => {:record => record}) if File.exists?(template) %>
+            <%= render(:template => ViewHelper.relative_plugin_view_path(template), :locals => {:record => record}) if File.exists?(template) %>
         <% end %>
     </head>
     <body>

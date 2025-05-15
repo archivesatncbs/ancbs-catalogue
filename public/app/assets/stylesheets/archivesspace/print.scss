@@ -1,0 +1,272 @@
+@media print {
+  /* Reset vertical space with print units */
+  * {
+    margin-top: 0 !important;
+    margin-bottom: 2pt !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Base elements */
+  body {
+    font-size: 12pt !important;
+  }
+
+  h1 {
+    font-size: 1.3em !important;
+  }
+  h2 {
+    font-size: 1.2em !important;
+  }
+  h3 {
+    font-size: 1.1em !important;
+  }
+  h4 {
+    font-size: 1em !important;
+  }
+  h5 {
+    font-size: 0.9em !important;
+  }
+  h6 {
+    font-size: 0.8em !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid !important;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 10pt !important;
+  }
+
+  /* Extend bootstrap/_print.scss anchors */
+  a[href]:not([href^='#']):not([href^='javascript:']) {
+    color: blue !important;
+    text-decoration: underline !important;
+  }
+
+  figure,
+  img,
+  ul {
+    break-inside: avoid !important;
+  }
+
+  /* Branding header */
+  #header > .row {
+    height: auto !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  #header h1 > a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+  #header h1 > a::after {
+    content: '' !important;
+  }
+
+  /* Brand logo */
+  #header .logo, 
+  /* Main navigation */
+  #navigation, 
+  /* Cite/Request/Print button container */
+  .page_actions, 
+  /* Tree sidebar */
+  #sidebar, 
+  /* Facet filter sidebar */
+  #filter-sidebar, 
+  /* All btns except repo details */
+  .btn:not(#whats-in-container .btn), 
+  #whats-in-container button > .fa,
+  #whats-in-container button > span,
+  #whats-in-container button > br,
+  /* Search results sorter */
+  .sorter, 
+  /* Search results pagination */
+  #paging, 
+  #paging_bottom,  
+  /* Main footer */
+  .panel-footer,
+  .readmore__label {
+    display: none !important;
+  }
+
+  /* Containers */
+  #content {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .breadcrumb,
+  #main-content,
+  .panel-heading,
+  .panel-body {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Bootstrap grid overrides */
+  .container-fluid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .col-1,
+  .col-xs-1,
+  .col-sm-1,
+  .col-md-1,
+  .col-lg-1,
+  .col-2,
+  .col-xs-2,
+  .col-sm-2,
+  .col-md-2,
+  .col-lg-2,
+  .col-3,
+  .col-xs-3,
+  .col-sm-3,
+  .col-md-3,
+  .col-lg-3,
+  .col-4,
+  .col-xs-4,
+  .col-sm-4,
+  .col-md-4,
+  .col-lg-4,
+  .col-5,
+  .col-xs-5,
+  .col-sm-5,
+  .col-md-5,
+  .col-lg-5,
+  .col-6,
+  .col-xs-6,
+  .col-sm-6,
+  .col-md-6,
+  .col-lg-6,
+  .col-7,
+  .col-xs-7,
+  .col-sm-7,
+  .col-md-7,
+  .col-lg-7,
+  .col-8,
+  .col-xs-8,
+  .col-sm-8,
+  .col-md-8,
+  .col-lg-8,
+  .col-9,
+  .col-xs-9,
+  .col-sm-9,
+  .col-md-9,
+  .col-lg-9,
+  .col-10,
+  .col-xs-10,
+  .col-sm-10,
+  .col-md-10,
+  .col-lg-10,
+  .col-11,
+  .col-xs-11,
+  .col-sm-11,
+  .col-md-11,
+  .col-lg-11,
+  .col-12,
+  .col-xs-12,
+  .col-sm-12,
+  .col-md-12,
+  .col-lg-12 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Decrease space between breadcrumb and record type */
+  .badge-and-identifier {
+    overflow: initial !important;
+  }
+
+  /* Decrease space between tabs and content */
+  #notes_row {
+    margin-top: 1rem !important;
+  }
+
+  /* Expand accordion panels */
+  .collapse {
+    display: initial !important;
+  }
+
+  /* Hide panel (Bootstrap v3) and card (Bootstrap v4) borders */
+  .panel,
+  .panel-default,
+  .panel-heading,
+  .panel-body,
+  .card,
+  .card-header,
+  .card-footer {
+    border-color: white !important;
+  }
+
+  /* Expand 'See more' sections */
+  .readmore__content {
+    max-height: unset;
+    overflow: auto;
+    background: none;
+    -webkit-text-fill-color: unset;
+  }
+
+  /* Hide load all records toggle */
+  #load-all-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+  }
+
+  /* Show all infinite records, tighten space */
+  .infinite-records-container {
+    height: auto !important;
+    margin-top: 0 !important;
+    display: inline-block !important;
+  }
+  .infinite-item > .information {
+    padding-top: 0 !important;
+  }
+
+  /* Applied by print.js */
+  .page-location-for-printing {
+    padding: 2px;
+    font-size: 10px;
+  }
+
+  /* Utility class */
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Print margins */
+  @page {
+    margin: 1cm;
+  }
+
+  /* Add back features removed in Bootstrap v4 for desired parity with Bootstrap v3 */
+  @page {
+    size: auto; /* enables orientation options in print dialog */
+  }
+
+  a[href]:not([href^='#']):not([href^='javascript:'])::after {
+    content: ' (' attr(href) ')';
+  }
+
+  a[href^='#']::after,
+  a[href^='javascript:']::after {
+    content: '';
+  }
+}

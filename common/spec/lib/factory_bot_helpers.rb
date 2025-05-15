@@ -86,6 +86,9 @@ FactoryBot.define do
   sequence(:name_source) { sample(JSONModel(:abstract_name).schema['properties']['source']) }
   sequence(:transliteration) { sample(JSONModel(:abstract_name).schema['properties']['transliteration']) }
 
+  # Accession
+  sequence(:acquisition_type) { sample(JSONModel(:accession).schema['properties']['acquisition_type']) }
+
   # Accession Parts Relationship
   sequence(:accession_parts_relator) {sample(JSONModel(:accession_parts_relationship).schema['properties']['relator'])}
   sequence(:accession_parts_relator_type) {sample(JSONModel(:accession_parts_relationship).schema['properties']['relator_type'])}
@@ -250,6 +253,14 @@ FactoryBot.define do
     condition_description { generate(:generic_description) }
     accession_date { generate(:yyyy_mm_dd) }
     extents { [build(:json_extent)] }
+
+    trait :with_acquisition_type do
+      acquisition_type { generate(:acquisition_type) }
+    end
+
+    trait :with_lang_materials do
+      lang_materials { [build(:json_lang_material)] }
+    end
   end
 
   factory :json_active_edits, class: JSONModel(:active_edits) do
@@ -858,14 +869,14 @@ FactoryBot.define do
   end
 
   factory :json_merge_request_detail, class: JSONModel(:merge_request_detail) do
-    target { {'ref' => create(:json_agent_person).uri} }
-    victims { [ {'ref' => create(:json_agent_person).uri}, {'ref' => create(:json_agent_person).uri} ] }
+    merge_destination { {'ref' => create(:json_agent_person).uri} }
+    merge_candidates { [ {'ref' => create(:json_agent_person).uri}, {'ref' => create(:json_agent_person).uri} ] }
     selections {}
   end
 
   factory :json_merge_request, class: JSONModel(:merge_request) do
-    target { {'ref' => create(:json_subject).uri} }
-    victims { [ {'ref' => create(:json_subject).uri}, {'ref' => create(:json_subject).uri} ] }
+    merge_destination { {'ref' => create(:json_subject).uri} }
+    merge_candidates { [ {'ref' => create(:json_subject).uri}, {'ref' => create(:json_subject).uri} ] }
   end
 
   factory :json_metadata_rights_declaration, class: JSONModel(:metadata_rights_declaration) do
@@ -1385,7 +1396,7 @@ FactoryBot.define do
     used_languages { [build(:json_used_language)] }
   end
 
-  factory :json_agent_person_merge_target, class: JSONModel(:agent_person) do
+  factory :json_agent_person_merge_destination, class: JSONModel(:agent_person) do
     agent_type { 'agent_person' }
     names { [build(:json_name_person)] }
     dates_of_existence { [build(:json_structured_date_label)] }
@@ -1393,7 +1404,7 @@ FactoryBot.define do
     agent_record_controls { [build(:agent_record_control)] }
   end
 
-  factory :json_agent_person_merge_victim, class: JSONModel(:agent_person) do
+  factory :json_agent_person_merge_candidate, class: JSONModel(:agent_person) do
     agent_type { 'agent_person' }
     names { [build(:json_name_person)] }
     dates_of_existence { [build(:json_structured_date_label)] }

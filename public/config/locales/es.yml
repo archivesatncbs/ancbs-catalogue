@@ -91,6 +91,8 @@ es:
       notes_published: Notas
       finding_aid_title: Título del instrumento de descripción
       finding_aid_filing_title: Título abreviado del instrumento de descripción
+      instance_type_enum_s: Tipo de representación
+      acquisition_type: Tipo de entrada
     page_title: "Encontrado %{count} resultados"
     results_head: "Mostrando %{type}: %{start} - %{end} of %{total}"
     result: Resultado
@@ -307,6 +309,8 @@ es:
     _public:
       identifier: Identificador
       extent: Extensión
+      extent_full: Extensión completa
+      extent_partial: Extensión parcial
       dates: Fechas
       lang: Nota de idioma de materiales
       script: Escritura
@@ -455,6 +459,7 @@ es:
     collection_inventory: Inventario de la colección
     summary_information: Información de resumen
     table_of_contents: Tabla de contenidos
+    return_to_table_of_contents: Volver a la tabla de contenidos
     publication_statement: Declaración de publicación
     controlled_access_headings: Encabezados de acceso controlado
     finding_aid_date_prefix: Esta ayuda de búsqueda se elaboró utilizando ArchivesSpace en

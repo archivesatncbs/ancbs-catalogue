@@ -20,10 +20,10 @@
 
     <dt><%= I18n.t('resource._public.identifier_pdf') %>:</dt><dd><%= record.identifier %></dd>
 
-    <% if record['ark_name'] %> 
+    <% if record['ark_name'] %>
       <dt><%= I18n.t('resource._public.identifier_ark') %>:</dt><dd><a href='<%= record['ark_name'].first %>'>Archival Resource Key</a></dd>
 
-    <% end %> 
+    <% end %>
 
     <dt><%= I18n.t('resource._public.uri') %>:</dt>
     <dd><%= record['uri'] %></dd>
@@ -90,7 +90,7 @@
 
 </dl>
 
-    <a href="#toc">Return to Table of Contents</a>
+    <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 
     <% record.notes.each do |note_type, note| %>
         <% if note_type == 'prefercite' %>
@@ -118,7 +118,7 @@
     <% end %>
   <% end %>
 
-  <a href="#toc">Return to Table of Contents</a>
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 </div>
 
 
@@ -136,7 +136,7 @@
     <p><%== process_mixed_content(n['note_text']) %></p>
   <% end %>
 
-  <a href="#toc">Return to Table of Contents</a>
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 <% end %>
 
 <a id="note-arrangement"></a>
@@ -153,7 +153,7 @@
     <p><%== process_mixed_content(n['note_text']) %></p>
   <% end %>
 
-  <a href="#toc">Return to Table of Contents</a>
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 <% end %>
 
 
@@ -167,7 +167,7 @@
 }) %>
 
 <%# FIXME: duplicated from title page because this code doesn't work in a partial for some reason %>
-<% if record.resolved_repository && 
+<% if record.resolved_repository &&
       record.resolved_repository['agent_representation'].any? &&
       record.resolved_repository['agent_representation']['_resolved'].any? &&
       record.resolved_repository['agent_representation']['_resolved']['agent_contacts'].any? %>
@@ -179,18 +179,18 @@
 
 <div class="repository-information">
   <div class="repository-address"><%= record.resolved_repository['name'] %></div>
-  
+
   <% if contacts %>
     <div class="repository-address">
-      <% if contacts['address_1'] %> 
+      <% if contacts['address_1'] %>
         <p><%= contacts['address_1'] %></p>
       <% end %>
 
-      <% if contacts['address_2'] %> 
+      <% if contacts['address_2'] %>
         <p><%= contacts['address_2'] %></p>
       <% end %>
 
-      <% if contacts['address_3'] %> 
+      <% if contacts['address_3'] %>
         <p><%= contacts['address_3'] %></p>
       <% end %>
 
@@ -199,7 +199,7 @@
       <% address_string += ", #{contacts['region']}" if contacts['region'] %>
       <% address_string += " #{contacts['post_code']}" if contacts['post_code'] %>
 
-      <% unless address_string.empty? %> 
+      <% unless address_string.empty? %>
         <p><%= address_string %></p>
       <% end %>
     </div>
@@ -216,12 +216,12 @@
 
 <%# display all notes %>
 <% record.notes.each do |note_type, note| %>
-  <% next if note_type == "bioghist" %> 
-  <% next if note_type == "scopecontent" %> 
-  <% next if note_type == "relatedmaterial" %> 
-  <% next if note_type == "odd" %> 
-  <% next if note_type == "arrangement" %> 
-  <% next if note_type == "prefercite" %> 
+  <% next if note_type == "bioghist" %>
+  <% next if note_type == "scopecontent" %>
+  <% next if note_type == "relatedmaterial" %>
+  <% next if note_type == "odd" %>
+  <% next if note_type == "arrangement" %>
+  <% next if note_type == "prefercite" %>
 
   <% record.notes[note_type].each do |n| %>
     <% next unless n['subnotes'] %>
@@ -233,7 +233,7 @@
   <% end %>
 <% end %>
 
-<a href="#toc">Return to Table of Contents</a>
+<a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 
 <a id="note-relatedmaterial"></a>
 
@@ -273,7 +273,7 @@
 
   </ul>
 
-  <a href="#toc">Return to Table of Contents</a>
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 <% end %>
 
 
@@ -289,12 +289,28 @@
     <p><%== process_mixed_content(n['note_text']) %></p>
   <% end %>
 
-  <a href="#toc">Return to Table of Contents</a>
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
+<% end %>
+
+<% unless record.notes['note_bibliography'].nil? %>
+  <a id="note-note_bibliography"></a>
+  <% record.notes['note_bibliography'].each do |n| %>
+    <h3>
+      <% if n['label'] %>
+          <%== process_mixed_content(n['label']) %>
+      <% else %>
+          <%= I18n.t("enumerations._note_types.note_bibliography") %>
+      <% end %>
+    </h3>
+    <p><%== process_mixed_content(n['note_text']) %></p>
+  <% end %>
+
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 <% end %>
 
 
 <% ASUtils.find_local_directories('public/views/_pdf_resource.html.erb').each do |template| %>
-    <%= render(:inline => File.read(template), :locals => {:record => record}) if File.exists?(template) %>
+    <%= render(:template => ViewHelper.relative_plugin_view_path(template), :locals => {:record => record}) if File.exists?(template) %>
 <% end %>
 
 <div class="collection-inventory">
@@ -304,6 +320,6 @@
     <table class="collection-inventory-header">
       <td class="title">Title/Description</td>
       <td class="instance">Instances</td>
-    </table> 
+    </table>
 
 <% end %>

@@ -174,6 +174,8 @@ en:
       notes_published: Notes
       finding_aid_title: Finding Aid Title
       finding_aid_filing_title: Finding Aid Filing Title
+      instance_type_enum_s: Instance type
+      acquisition_type: Acquisition Type
     page_title: "Found %{count} Results"
     results_head: "Showing %{type}: %{start} - %{end} of %{total}"
     result: Result
@@ -394,6 +396,8 @@ en:
       identifier_ark: "ID [ark]"
       ark_link_name: "Archival Resource Key"
       extent: Extent
+      extent_full: Full Extent
+      extent_partial: Partial Extent
       dates: Dates
       lang: Language of Materials
       lang_pdf: Language of the Material
@@ -550,6 +554,7 @@ en:
     collection_inventory: Collection Inventory
     summary_information: Summary Information
     table_of_contents: Table Of Contents
+    return_to_table_of_contents: Return to Table of Contents
     publication_statement: Publication Statement
     controlled_access_headings: Controlled Access Headings
     finding_aid_date_prefix: This finding aid was produced using ArchivesSpace on

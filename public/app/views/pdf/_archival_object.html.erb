@@ -12,7 +12,7 @@ format_container = lambda do |type, indicator|
 end
 %>
 <%
-  is_heading = is_parent && (record.level == "series" || record.level == "subseries" || record.level == "collection") 
+  is_heading = is_parent && (record.level == "series" || record.level == "subseries" || record.level == "collection")
 %>
 
 <div class="avoid-break">
@@ -160,7 +160,7 @@ end
                 <% end %>
 
                 <% ASUtils.find_local_directories('public/views/_pdf_archival_object.html.erb').each do |template| %>
-                    <%= render(:inline => File.read(template), :locals => {:record => record}) if File.exists?(template) %>
+                    <%= render(:template => ViewHelper.relative_plugin_view_path(template), :locals => {:record => record}) if File.exists?(template) %>
                 <% end %>
 
             </dl>
@@ -171,4 +171,3 @@ end
 
     </div>
 <% end %>
-

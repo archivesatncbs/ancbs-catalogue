@@ -81,6 +81,8 @@ ja:
       notes_published: ノート
       finding_aid_title: 援助のタイトルを見つける
       finding_aid_filing_title: 援助申請のタイトルを探す
+      instance_type_enum_s: インスタンスの種類
+      acquisition_type: 獲得タイプ
     page_title: 見つかった%{count}結果
     results_head: "%{type} ： %{start} - %{end}の%{total}"
     result: 結果
@@ -276,6 +278,8 @@ ja:
     _public:
       identifier: 識別
       extent: エクステント
+      extent_full: 完全なエクステント
+      extent_partial: 部分的なエクステント
       dates: 日付
       lang: 材料の言語
       script: スクリプト
@@ -401,6 +405,7 @@ ja:
     collection_inventory: コレクションインベントリ
     summary_information: 要約情報
     table_of_contents: 目次
+    return_to_table_of_contents: 目次に戻る
     publication_statement: 出版物
     controlled_access_headings: 制御されたアクセス見出し
     finding_aid_date_prefix: この発見支援は、ArchivesSpace on

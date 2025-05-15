@@ -3,7 +3,7 @@
   max_chars = AppConfig[:pui_readmore_max_characters]
 %>
 
-<div class="d-flex flex-column align-items-start wrap-anywhere note-content">
+<div class="wrap-anywhere note-content">
   <% unless is_inherited.blank? %>
     <%= inheritance(is_inherited).html_safe %>
   <% end %>

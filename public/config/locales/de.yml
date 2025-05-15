@@ -78,6 +78,8 @@ de:
       notes_published: Anmerkungen
       finding_aid_title: Titel des Findmittels
       finding_aid_filing_title: Findmittel Ablagetitel
+      instance_type_enum_s: Exemplar-Typ
+      acquisition_type: Beschaffungs-Art
     result: Ergebnis
     results: Ergebnisse
     search_for: Suche %{type} wobei %{conditions}
@@ -246,6 +248,8 @@ de:
     _public:
       identifier: Signatur
       extent: Umfang
+      extent_full: Vollständiger Umfang
+      extent_partial: Teiler Umfang
       dates: Daten
       lang: Sprache des Archivguts
       script: Schrift
@@ -406,6 +410,7 @@ de:
     collection_inventory: Sammlungs-Verzeichnis
     summary_information: Zusammengefasste Informationen
     table_of_contents: Inhalt
+    return_to_table_of_contents: Zurück zum Inhalt
     publication_statement: Veröffentlichungs-Bezeichnung
     controlled_access_headings: Überschriften für geregelten Zugang
     finding_aid_date_prefix: Dieses Findmittel wurde erstellt mit ArchivesSpace am

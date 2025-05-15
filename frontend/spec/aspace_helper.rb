@@ -34,21 +34,24 @@ module ASpaceHelpers
   end
 
   def ensure_repository_access
-    times = 0
-    while page.has_text?('You do not have access to any Repositories.') || times < 5
-      sleep(3)
+    i = 0
+    while i < 20 do
+      break unless page.has_text?('You do not have access to any Repositories.', wait: 1)
+
       page.refresh
-      times += 1
+      i = i + 1
     end
   end
 
   def select_repository(repo)
     click_button 'Select Repository'
-
-    if repo.respond_to? :repo_code
-      select repo.repo_code, from: 'id'
-    else
-      select repo, from: 'id'
+    wait_for_ajax
+    using_wait_time(25) do
+      if repo.respond_to? :repo_code
+        select repo.repo_code, from: 'id'
+      else
+        select repo, from: 'id'
+      end
     end
 
     within "form[action='/repositories/select']" do

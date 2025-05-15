@@ -23,7 +23,7 @@
   num_records = @ordered_records.count
 %>
 
-<div class="row overflow-hidden">
+<div class="row">
   <div
     id="sidebar"
     class="sidebar sidebar-container col-12 col-lg-3 resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar"
@@ -81,14 +81,14 @@ infiniteTree.container.addEventListener('click', (e) => {
  */
 function treeClickDelegator(event, tree, records) {
   if (
-    !event.target.classList.contains('expandme') &&
-    !event.target.classList.contains('expandme-icon') &&
-    !event.target.classList.contains('record-title')
+    !event.target.classList.contains('node-expand') &&
+    !event.target.classList.contains('node-expand-icon') &&
+    !event.target.classList.contains('node-title')
   ) return;
 
-  if (event.target.className.includes('expandme')) {
+  if (event.target.className.includes('node-expand')) {
     tree.expandHandler(event);
-  } else if (event.target.classList.contains('record-title')) {
+  } else if (event.target.classList.contains('node-title')) {
     records.treeLinkHandler(event);
   }
 }

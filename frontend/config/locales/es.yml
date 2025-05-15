@@ -65,7 +65,7 @@ es:
     merge_resource_confirm_message: "El fondo '%{source}' tendrá los registros seleccionados
       fusionados con él. Se eliminarán todos los registros de selectos y cualquier
       registros vinculados será nuevamente vinculados a este fondo."
-    merge_container_profile_confirm_message: "El perfil de contenedor '%{target}'
+    merge_container_profile_confirm_message: "El perfil de contenedor '%{merge_destination}'
       tendrá los registros seleccionados fusionados en él. Todos los registros seleccionados
       se eliminarán y los registros vinculados se volverán a vincular a este recurso."
     batch_merge: "Seleccione el registro en el que se fusionarán todos los demás registros
@@ -88,9 +88,9 @@ es:
     set_default: Marcar como predeterminado
     suppress: Bloquear
     suppress_confirm_title: ¿Bloquear este registro?
-    suppress_confirm_message: "Mientras que un registro bloqueado permanecerá en la\
-      \ base de datos, se convertirá en ocultos a la mayoría de los usuarios y a la\
-      \ mayoría de las funciones de carácter."
+    suppress_confirm_message: "Mientras que un registro bloqueado permanecerá en la
+      base de datos, se convertirá en ocultos a la mayoría de los usuarios y a la
+      mayoría de las funciones de carácter."
     toggle_dropdown_menu: Alternar menú desplegable
     transfer: Transferencia
     transfer_confirm_title: ¿La transferencia de este registro?
@@ -760,7 +760,8 @@ es:
       tenga permiso para ver."
     error_tree_pane_ajax: Se ha producido un error al cargar este formulario.
     merge_conflict: "Los agentes fusionados no pudieron completar: %{message}"
-    merge_too_many_victims: Solo se puede seleccionar un agente para una fusión detallada.
+    merge_too_many_merge_candidates: Solo se puede seleccionar un agente para una
+      fusión detallada.
     merge_different_types: Los agentes seleccionados para la fusión detallada deben
       ser del mismo tipo.
     linked_to_assessment: El registro no se puede eliminar ya que está vinculado a
@@ -810,8 +811,8 @@ es:
         search_embedded: Registros vinculados
         linked_via_rights_statement: Registros vinculados mediante declaración de
           derechos
-        target_record: Este registro será actualizado
-        victim_record: Este registro será eliminado
+        merge_destination_record: Este registro será actualizado
+        merge_candidate_record: Este registro será eliminado
         record_control_information: Información de control de registros
         identity_information: Información de identidad
         description_information: Descripción Información
@@ -1314,6 +1315,7 @@ es:
         reset: Preferencias establecidas en los valores predeterminados de la aplicación
         reset_error: "No se pueden restablecer las preferencias debido a un error:
           %{exception}"
+        no_access_to_preferences: "Debe crear al menos un repositorio antes de administrar las preferencias"
       action:
         save: Guardar preferencias
 
@@ -1726,12 +1728,13 @@ es:
         batch_merge_container_profile_mismatch_warning: Estos contenedores superiores
           tienen un perfil de recipiente diferente que el recipiente superior objetivo.
           El perfil contenedor no se fusionará con el contenedor de destino.
-        batch_merge_confirm_victims: "Combinar los siguientes contenedores superiores:"
-        batch_merge_confirm_target: "En este contenedor superior:"
+        batch_merge_confirm_merge_candidates: "Combinar los siguientes contenedores
+          superiores:"
+        batch_merge_confirm_merge_destination: "En este contenedor superior:"
         batch_delete: Borrar Contenedores Top
         batch_delete_help: Borrar todos los contenedores seleccionados.
         update_n_records: "Actualizar %{n} registros"
-        select_merge_target: Seleccionar objetivo de fusión
+        select_merge_destination: Seleccionar objetivo de fusión
         merge_n_records: "Va %{n} registros"
         delete_n_records: "Borrar %{n} registros"
         update_locations_current_location: Ubicación actual
@@ -1760,12 +1763,12 @@ es:
           todos los demás perfiles de contenedor enumerados. Todos los registros vinculados
           se volverán a vincular a este perfil y se eliminará toda la información
           para los otros perfiles de contenedor.
-        merge_select_target: Seleccionar objetivo de fusión
+        merge_select_merge_destination: Seleccionar objetivo de fusión
         confirm_merge: Confirmar perfiles de contenedor de fusión
         confirm_merge_question: ¿Está seguro de que desea fusionar los perfiles del
           contenedor como se enumeran a continuación? Esta acción es irreversible.
-        confirm_merge_victims: "Combinar los siguientes perfiles de contenedor:"
-        confirm_merge_target: "En este perfil de contenedor:"
+        confirm_merge_candidates: "Combinar los siguientes perfiles de contenedor:"
+        confirm_merge_destination: "En este perfil de contenedor:"
     name: Nombre
     name_tooltip: |
       <p>CAMPO REQUERIDO. El nombre del perfil de contenedores. Pueden ser genéricos o específicos.</p>
@@ -2224,7 +2227,7 @@ es:
     script: Texto
     language_note: Nota de idioma
 
-  agent_record_control_merge_target:
+  agent_record_control_merge_destination:
     _plural: Información de registro
     _singular: Información de registro
     _frontend:
@@ -2246,7 +2249,7 @@ es:
     script: Texto
     language_note: Nota de idioma
 
-  agent_record_control_merge_victim:
+  agent_record_control_merge_candidate:
     _plural: Información de registro
     _singular: Información de registro
     _frontend:
@@ -2298,7 +2301,7 @@ es:
     note: Nota
     dates: fechas
 
-  agent_gender_merge_target:
+  agent_gender_merge_destination:
     _plural: Géneros de agentes
     _singular: Género del agente
     _frontend:
@@ -2335,7 +2338,7 @@ es:
     language: Idioma
     script: Texto
 
-  used_language_merge_victim:
+  used_language_merge_candidate:
     _plural: Idiomas
     _singular: Idioma
     _frontend:
@@ -2344,7 +2347,7 @@ es:
     language: Idioma
     script: Texto
 
-  used_language_merge_target:
+  used_language_merge_destination:
     _plural: Idiomas
     _singular: Idioma
     _frontend:
@@ -2353,7 +2356,7 @@ es:
     language: Idioma
     script: Texto
 
-  agent_gender_merge_victim:
+  agent_gender_merge_candidate:
     _plural: Géneros de agentes
     _singular: Género del agente
     _frontend:
@@ -2390,7 +2393,7 @@ es:
     identifier_type: Tipo de identificador
     entity_identifier: ID de entidad
 
-  agent_identifier_merge_target:
+  agent_identifier_merge_destination:
     _plural: ID de entidad
     _singular: Identificador
     _frontend:
@@ -2399,7 +2402,7 @@ es:
     identifier_type: Tipo de identificador
     entity_identifier: ID de entidad
 
-  agent_identifier_merge_victim:
+  agent_identifier_merge_candidate:
     _plural: ID de entidad
     _singular: Identificador
     _frontend:
@@ -2450,7 +2453,7 @@ es:
     subjects: Lugares
     publish: Publicado
 
-  agent_place_merge_target:
+  agent_place_merge_destination:
     _frontend:
       action:
         add: Añadir lugar
@@ -2464,7 +2467,7 @@ es:
     subjects: Lugares
     publish: Publicado
 
-  agent_place_merge_victim:
+  agent_place_merge_candidate:
     _frontend:
       action:
         add: Añadir lugar
@@ -2520,7 +2523,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_occupation_merge_target:
+  agent_occupation_merge_destination:
     _frontend:
       action:
         add: Agregar ocupación
@@ -2534,7 +2537,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_occupation_merge_victim:
+  agent_occupation_merge_candidate:
     _frontend:
       action:
         add: Agregar ocupación
@@ -2590,7 +2593,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_function_merge_target:
+  agent_function_merge_destination:
     _frontend:
       action:
         add: Agregar función
@@ -2604,7 +2607,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_function_merge_victim:
+  agent_function_merge_candidate:
     _frontend:
       action:
         add: Agregar función
@@ -2660,7 +2663,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_topic_merge_target:
+  agent_topic_merge_destination:
     _frontend:
       action:
         add: Agregar tema
@@ -2674,7 +2677,7 @@ es:
     places: Lugares
     publish: Publicado
 
-  agent_topic_merge_victim:
+  agent_topic_merge_candidate:
     _frontend:
       action:
         add: Agregar tema
@@ -2742,7 +2745,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_alternate_set_merge_target:
+  agent_alternate_set_merge_destination:
     _plural: Conjuntos alternativos
     _singular: Conjunto alternativo
     _frontend:
@@ -2758,7 +2761,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_alternate_set_merge_victim:
+  agent_alternate_set_merge_candidate:
     _plural: Conjuntos alternativos
     _singular: Conjunto alternativo
     _frontend:
@@ -2825,7 +2828,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_conventions_declaration_merge_target:
+  agent_conventions_declaration_merge_destination:
     _plural: Declaraciones de la Convención
     _singular: Declaración de la Convención
     _frontend:
@@ -2842,7 +2845,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_conventions_declaration_merge_victim:
+  agent_conventions_declaration_merge_candidate:
     _plural: Declaraciones de la Convención
     _singular: Declaración de la Convención
     _frontend:
@@ -2886,7 +2889,7 @@ es:
     agency_code_type: Tipo de código de la agencia de control de registros
     maintenance_agency: Agencia de mantenimiento
 
-  agent_other_agency_code_merge_target:
+  agent_other_agency_code_merge_destination:
     _plural: Otros códigos de agencia
     _singular: Otro código de agencia
     _frontend:
@@ -2895,7 +2898,7 @@ es:
     agency_code_type: Tipo de código de la agencia de control de registros
     maintenance_agency: Agencia de mantenimiento
 
-  agent_other_agency_code_merge_victim:
+  agent_other_agency_code_merge_candidate:
     _plural: Otros códigos de agencia
     _singular: Otro código de agencia
     _frontend:
@@ -2940,7 +2943,7 @@ es:
     descriptive_note: Nota descriptiva
     event_date: Fecha del evento
 
-  agent_maintenance_history_merge_target:
+  agent_maintenance_history_merge_destination:
     _plural: Historial de mantenimiento
     _singular: Historial de mantenimiento del agente
     _frontend:
@@ -2952,7 +2955,7 @@ es:
     descriptive_note: Nota descriptiva
     event_date: Fecha del evento
 
-  agent_maintenance_history_merge_victim:
+  agent_maintenance_history_merge_candidate:
     _plural: Historial de mantenimiento
     _singular: Historial de mantenimiento del agente
     _frontend:
@@ -3000,7 +3003,7 @@ es:
     primary: Primario
     record_identifier: Identificador de registro
 
-  agent_record_identifier_merge_target:
+  agent_record_identifier_merge_destination:
     _plural: ID de registro
     _singular: ID de registro
     _frontend:
@@ -3012,7 +3015,7 @@ es:
     primary: Primario
     record_identifier: Identificador de registro
 
-  agent_record_identifier_merge_victim:
+  agent_record_identifier_merge_candidate:
     _plural: ID de registro
     _singular: ID de registro
     _frontend:
@@ -3072,7 +3075,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_source_merge_target:
+  agent_source_merge_destination:
     _plural: Fuentes
     _singular: Fuente del agente
     _frontend:
@@ -3088,7 +3091,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_source_merge_victim:
+  agent_source_merge_candidate:
     _plural: Fuentes
     _singular: Fuente del agente
     _frontend:
@@ -3180,7 +3183,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_resource_merge_victim:
+  agent_resource_merge_candidate:
     _frontend:
       action:
         add: Agregar recurso externo relacionado
@@ -3203,7 +3206,7 @@ es:
     file_version_xlink_show_attribute: Atributo de Xlink Show
     last_verified_date: Última fecha de verificación
 
-  agent_resource_merge_target:
+  agent_resource_merge_destination:
     _frontend:
       action:
         add: Agregar recurso externo relacionado
@@ -3275,10 +3278,10 @@ es:
   metadata_rights_declaration_required:
     <<: *metadata_rights_declaration_attributes
 
-  metadata_rights_declaration_merge_target:
+  metadata_rights_declaration_merge_destination:
     <<: *metadata_rights_declaration_attributes
 
-  metadata_rights_declaration_merge_victim:
+  metadata_rights_declaration_merge_candidate:
     <<: *metadata_rights_declaration_attributes
   bulk_import_templates:
     aspace_accession_import_template_csv: Cree registros de accesiones y registros

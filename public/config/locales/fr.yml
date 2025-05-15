@@ -110,6 +110,8 @@ fr:
       notes_published: Remarques
       finding_aid_title: Titre de l'instrument de recherche
       finding_aid_filing_title: Titre de classement de l'aide
+      instance_type_enum_s: Type d'instance
+      acquisition_type: Type d'acquisition
     page_title: "%{count} résultats trouvés"
     results_head: "%{type} affichés : %{start} - %{end} de %{total}"
     result: Résultats
@@ -182,8 +184,8 @@ fr:
   search_sorting:
     sort_by: "Trier par :"
     sort: Trier
-    asc: ascendant
-    desc: descendant
+    asc: (ascendant)
+    desc: (descendant)
     relevance: Pertinence
     title_sort: Intitulé
     identifier: Identifiant
@@ -329,6 +331,8 @@ fr:
     _public:
       identifier: Identifiant
       extent: Volume
+      extent_full: Volume complet
+      extent_partial: Volume partiel
       dates: Dates
       lang: Langue des matériaux
       script: Scénario
@@ -366,7 +370,7 @@ fr:
     load_records:
       alert: "Cette collection contient un grand nombre d'enregistrements"
       showing: "Affichage"
-      percent_convention: " %"
+      percent_convention: "%"
       load: "Charger les enregistrements"
       load_all: "Charger tous les enregistrements"
       scroll: "Au défilement"
@@ -381,7 +385,7 @@ fr:
   related_resource: {}
   digital_object:
     _singular: Document numérique
-    _plural: Documents numériques
+    _plural: Matériaux numériques
     _public:
       thumbnail: miniature
       link: Lien vers objet numérique
@@ -481,6 +485,7 @@ fr:
     collection_inventory: Inventaire des collections
     summary_information: Résumé informatif
     table_of_contents: Table des matières
+    return_to_table_of_contents: Retour à la table des matières
     publication_statement: Mention de publication
     controlled_access_headings: En-têtes de confidentialité
     finding_aid_date_prefix: Instrument de recherche élaboré à l'aide d'ArchivesSpace sur

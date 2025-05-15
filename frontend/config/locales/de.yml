@@ -136,8 +136,8 @@ de:
     merge_subject_confirm_message: Das Thema '%{source}' wird mit den gewählten Aufzeichnungen
       zusammengeführt. Alle gewählten Aufzeichnungen werden gelöscht und jede verknüpfte
       Aufzeichnung wird neu mit diesem Thema verknüpft.
-    merge_container_profile_confirm_message: Das Behältnis-Profil '%{target}' wird
-      mit den gewählten Aufzeichnungen zusammengeführt. Alle gewählten Aufzeichnungen
+    merge_container_profile_confirm_message: Das Behältnis-Profil '%{merge_destination}'
+      wird mit den gewählten Aufzeichnungen zusammengeführt. Alle gewählten Aufzeichnungen
       werden gelöscht und jede verknüpfte Aufzeichnung wird neu mit dieser Ressource
       verknüpft.
     save_plus_one: '+1'
@@ -914,7 +914,8 @@ de:
     error_403_message: Die aufgerufene Seite könnte nicht mehr existieren oder Sie
       haben keine Rechte sie anzuzeigen.
     error_404: Aufzeichnung nicht gefunden
-    merge_too_many_victims: Nur ein Akteur kann zum Zusammenführen ausgewählt werden.
+    merge_too_many_merge_candidates: Nur ein Akteur kann zum Zusammenführen ausgewählt
+      werden.
     merge_conflict: 'Das Zusammenführen von Akteuren konnte nicht abgeschlossen werden:
       %{message}'
     merge_restricted_contact_details: Das Zusammenführen konnte nicht abgeschlossen
@@ -964,8 +965,8 @@ de:
         basic_information: Grundlegende Informationen
         linked_via_rights_statement: Durch Rechteerklärung verknüpfte Aufzeichnungen
         events: Ereignisse
-        target_record: Diese Aufzeichnung wird aktualisiert
-        victim_record: Diese Aufzeichnung wird gelöscht
+        merge_destination_record: Diese Aufzeichnung wird aktualisiert
+        merge_candidate_record: Diese Aufzeichnung wird gelöscht
         structured_date_single_fields: Einzeldatum
         structured_date_range_fields: Datumsbereich
         dates_of_existence: Existenzdaten
@@ -1051,7 +1052,6 @@ de:
         bulk_import: Mit Tabelle laden
         add_child: Kind hinzufügen
         select_resource: Ressource auswählen
-        select_parent: Übergeordnetes Element auswählen
         leave_parent_empty: Schließen / Übergeordnetes Element nicht zuweisen
         select_parent_and_position: Position der Komponente auswählen
       tree:
@@ -1477,6 +1477,7 @@ de:
         reset: Voreinstellungen auf Anwendungs-Standards gesetzt
         reset_error: 'Konnte Voreinstellungen wegen einem Fehler nicht zurücksetzen:
           %{exception}'
+        no_access_to_preferences: "Sie müssen mindestens einen Aufbewahrungsort erstellen, bevor Sie Voreinstellungen verwalten können"
       action:
         save: Einstellungen speichern
   rights_statement:
@@ -1528,12 +1529,6 @@ de:
         error_create: Benutzer nicht gespeichert
         error_not_found: Es wurde kein Benutzerkonto für %{email} gefunden. Fragen
           Sie Ihren Administrator um Hilfe.
-        password_recovery_not_allowed: Die Passwortwiederherstellung ist nicht erlaubt.
-          Kontaktieren Sie Ihren Administrator.
-        password_recovery_fail: Die Passwortwiederherstellung ist fehlgeschlagen.
-          Kontaktieren Sie Ihren Administrator.
-        password_recovery_email_sent: Eine E-Mail mit Anweisungen zur Wiederherstellung
-          Ihres Passworts wurde an %{email} gesendet
         password_reset_email_sent: Wenn ein Konto für %{email} existiert, wird eine
           E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts gesendet.
         password_reset_fail: Das Zurücksetzen des Passworts ist fehlgeschlagen. Kontaktieren
@@ -1679,10 +1674,10 @@ de:
   used_languages:
     <<: *used_language_attributes
 
-  used_language_merge_victim:
+  used_language_merge_candidate:
     <<: *used_language_attributes
 
-  used_language_merge_target:
+  used_language_merge_destination:
     <<: *used_language_attributes
   agent_function: &agent_function_attributes
     _singular: Funktion
@@ -1703,10 +1698,10 @@ de:
   agent_functions:
     <<: *agent_function_attributes
 
-  agent_function_merge_target:
+  agent_function_merge_destination:
     <<: *agent_function_attributes
 
-  agent_function_merge_victim:
+  agent_function_merge_candidate:
     <<: *agent_function_attributes
   agent_place: &agent_place_attributes
     _singular: Ort
@@ -1727,10 +1722,10 @@ de:
   agent_places:
     <<: *agent_place_attributes
 
-  agent_place_merge_target:
+  agent_place_merge_destination:
     <<: *agent_place_attributes
 
-  agent_place_merge_victim:
+  agent_place_merge_candidate:
     <<: *agent_place_attributes
   agent_occupation: &agent_occupation_attributes
     _singular: Beruf
@@ -1751,10 +1746,10 @@ de:
   agent_occupations:
     <<: *agent_occupation_attributes
 
-  agent_occupation_merge_target:
+  agent_occupation_merge_destination:
     <<: *agent_occupation_attributes
 
-  agent_occupation_merge_victim:
+  agent_occupation_merge_candidate:
     <<: *agent_occupation_attributes
   agent_topic: &agent_topic_attributes
     _singular: Thema
@@ -1775,10 +1770,10 @@ de:
   agent_topics:
     <<: *agent_topic_attributes
 
-  agent_topic_merge_target:
+  agent_topic_merge_destination:
     <<: *agent_topic_attributes
 
-  agent_topic_merge_victim:
+  agent_topic_merge_candidate:
     <<: *agent_topic_attributes
   agent_identifier: &agent_identifier_attributes
     identifier_type: Signatur-Typ
@@ -1794,10 +1789,10 @@ de:
   agent_identifier_required:
     <<: *agent_identifier_attributes
 
-  agent_identifier_merge_target:
+  agent_identifier_merge_destination:
     <<: *agent_identifier_attributes
 
-  agent_identifier_merge_victim:
+  agent_identifier_merge_candidate:
     <<: *agent_identifier_attributes
   agent_record_identifier: &agent_record_identifier_attributes
     source: Quelle
@@ -1816,10 +1811,10 @@ de:
   agent_record_identifier_required:
     <<: *agent_record_identifier_attributes
 
-  agent_record_identifier_merge_target:
+  agent_record_identifier_merge_destination:
     <<: *agent_record_identifier_attributes
 
-  agent_record_identifier_merge_victim:
+  agent_record_identifier_merge_candidate:
     <<: *agent_record_identifier_attributes
   metadata_rights_declaration: &metadata_rights_declaration_attributes
     _singular: Rechteerklärung von Metadaten
@@ -1842,10 +1837,10 @@ de:
   metadata_rights_declaration_required:
     <<: *metadata_rights_declaration_attributes
 
-  metadata_rights_declaration_merge_target:
+  metadata_rights_declaration_merge_destination:
     <<: *metadata_rights_declaration_attributes
 
-  metadata_rights_declaration_merge_victim:
+  metadata_rights_declaration_merge_candidate:
     <<: *metadata_rights_declaration_attributes
   agent_gender: &agent_gender_attributes
     _singular: Geschlecht
@@ -1862,10 +1857,10 @@ de:
   agent_gender_required:
     <<: *agent_gender_attributes
 
-  agent_gender_merge_target:
+  agent_gender_merge_destination:
     <<: *agent_gender_attributes
 
-  agent_gender_merge_victim:
+  agent_gender_merge_candidate:
     <<: *agent_gender_attributes
   agent_resource: &agent_resource_attributes
     _singular: Verwandte externe Ressource
@@ -1895,10 +1890,10 @@ de:
   agent_resource_required:
     <<: *agent_resource_attributes
 
-  agent_resource_merge_victim:
+  agent_resource_merge_candidate:
     <<: *agent_resource_attributes
 
-  agent_resource_merge_target:
+  agent_resource_merge_destination:
     <<: *agent_resource_attributes
   database_warning:
     message: <p><strong>Datenbank Warnung:</strong> Sie verwenden derzeit die eingebaute
@@ -2076,10 +2071,10 @@ de:
         batch_merge_container_profile_mismatch_warning: Diese Haupt-Behältnisse haben
           verschiedene vom Ziel-Behältnis verschiedene Behältnis-Profile. Das Behältnis-Profile
           wird nicht mit dem Ziel-Behältnis zusammengeführt werden.
-        batch_merge_confirm_victims: 'Die folgenden Haupt-Behältnisse zusammenführen:'
-        batch_merge_confirm_target: 'In dieses Haupt-Behältnis:'
+        batch_merge_confirm_merge_candidates: 'Die folgenden Haupt-Behältnisse zusammenführen:'
+        batch_merge_confirm_merge_destination: 'In dieses Haupt-Behältnis:'
         batch_delete_help: Alle gewählten Behältnisse löschen.
-        select_merge_target: Ziel zum Zusammenführen wählen
+        select_merge_destination: Ziel zum Zusammenführen wählen
         merge_n_records: '%{n} Aufzeichnungen zusammenführen'
         delete_n_records: '%{n} Aufzeichnungen löschen'
         update_locations_new_location: Neuer Standort
@@ -2162,15 +2157,15 @@ de:
       bulk_operations:
         merge: Behältnis-Profile zusammenführen
         confirm_merge: Zusammenführen von Behältnis-Profilen bestätigen
-        confirm_merge_target: 'In dieses Behältnis-Profil:'
+        confirm_merge_destination: 'In dieses Behältnis-Profil:'
         merge_instructions: Wählen Sie das Behältnis-Profil mit dem alle anderen aufgeführten
           Behältnis-Profile zusammengeführt werden. Jede verknüpfte Aufzeichnung wird
           neu mit diesem Profil verknüpft und alle Informationen der anderen Behältnis-Profile
           werden gelöscht.
-        merge_select_target: Wählen Sie das Ziel zum Zusammenführen aus
+        merge_select_merge_destination: Wählen Sie das Ziel zum Zusammenführen aus
         confirm_merge_question: Sind Sie sicher, dass Sie die unten aufgeführten Behältnis-Profile
           zusammenführen möchten? Diese Aktion kann nicht rückgängig gemacht werden.
-        confirm_merge_victims: 'Zusammenführen folgender Behältnis-Profile:'
+        confirm_merge_candidates: 'Zusammenführen folgender Behältnis-Profile:'
       messages:
         created: Behältnis-Profil erstellt
         updated: Behältnis-Profil aktualisiert
@@ -2455,10 +2450,10 @@ de:
   agent_conventions_declaration_required:
     <<: *agent_conventions_declaration_attributes
 
-  agent_conventions_declaration_merge_target:
+  agent_conventions_declaration_merge_destination:
     <<: *agent_conventions_declaration_attributes
 
-  agent_conventions_declaration_merge_victim:
+  agent_conventions_declaration_merge_candidate:
     <<: *agent_conventions_declaration_attributes
   custom_report_template:
     _frontend:
@@ -2539,10 +2534,10 @@ de:
   agent_record_control_required:
     <<: *agent_record_control_attributes
 
-  agent_record_control_merge_target:
+  agent_record_control_merge_destination:
     <<: *agent_record_control_attributes
 
-  agent_record_control_merge_victim:
+  agent_record_control_merge_candidate:
     <<: *agent_record_control_attributes
   agent_alternate_set: &agent_alternate_set_attributes
     file_version_xlink_actuate_attribute: Xlink Actuate-Attribut
@@ -2565,10 +2560,10 @@ de:
   agent_alternate_set_required:
     <<: *agent_alternate_set_attributes
 
-  agent_alternate_set_merge_target:
+  agent_alternate_set_merge_destination:
     <<: *agent_alternate_set_attributes
 
-  agent_alternate_set_merge_victim:
+  agent_alternate_set_merge_candidate:
     <<: *agent_alternate_set_attributes
   agent_source: &agent_source_attributes
     _plural: Quellen
@@ -2591,10 +2586,10 @@ de:
   agent_source_required:
     <<: *agent_source_attributes
 
-  agent_source_merge_target:
+  agent_source_merge_destination:
     <<: *agent_source_attributes
 
-  agent_source_merge_victim:
+  agent_source_merge_candidate:
     <<: *agent_source_attributes
   agent_name:
     use_dates: Verwendungs-Daten
@@ -2621,10 +2616,10 @@ de:
   agent_other_agency_code_required:
     <<: *agent_other_agency_code_attributes
 
-  agent_other_agency_code_merge_target:
+  agent_other_agency_code_merge_destination:
     <<: *agent_other_agency_code_attributes
 
-  agent_other_agency_code_merge_victim:
+  agent_other_agency_code_merge_candidate:
     <<: *agent_other_agency_code_attributes
   agent_maintenance_history: &agent_maintenance_history_attributes
     _plural: Wartungsverlauf
@@ -2643,10 +2638,10 @@ de:
   agent_maintenance_history_required:
     <<: *agent_maintenance_history_attributes
 
-  agent_maintenance_history_merge_target:
+  agent_maintenance_history_merge_destination:
     <<: *agent_maintenance_history_attributes
 
-  agent_maintenance_history_merge_victim:
+  agent_maintenance_history_merge_candidate:
     <<: *agent_maintenance_history_attributes
   subsections:
     dates: Daten

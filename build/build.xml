@@ -62,7 +62,7 @@
     <javaversion atleast="17"/>
   </condition>
 
-  <property name="default_java_options" value="-Djava.security.egd=file:/dev/./urandom -Xmx2048m -Xss2m -Dfile.encoding=UTF-8 -Djavax.accessibility.assistive_technologies='' -Daspace.config.search_user_secret=devserver -Daspace.config.public_user_secret=devserver -Daspace.config.staff_user_secret=devserver -Daspace.devserver=true -Daspace.config.frontend_cookie_secret=devserver -Daspace.config.public_cookie_secret=devserver ${java_version_compatibility}" />
+  <property name="default_java_options" value="-Djava.security.egd=file:/dev/./urandom -Xmx2048m -Xss2m -Dfile.encoding=UTF-8 -Daspace.config.search_user_secret=devserver -Daspace.config.public_user_secret=devserver -Daspace.config.staff_user_secret=devserver -Daspace.devserver=true -Daspace.config.frontend_cookie_secret=devserver -Daspace.config.public_cookie_secret=devserver ${java_version_compatibility}" />
 
   <!-- TASKS -->
   <!-- Build tasks invoked using `./build/run [$task]` from the aspace directory -->
@@ -308,6 +308,60 @@
     <delete dir=".local" failonerror="false" />
   </target>
 
+  <target name="build-docker-conf-package" depends="set-classpath" description="Bundle the default configuration, plugins and docker-compose file into a zip file">
+    <delete failonerror="true" dir="docker_prod" />
+    <mkdir dir="docker_prod/archivesspace/config" />
+    <mkdir dir="docker_prod/archivesspace/backups" />
+    <mkdir dir="docker_prod/archivesspace/locales" />
+    <mkdir dir="docker_prod/archivesspace/locales/public" />
+    <mkdir dir="docker_prod/archivesspace/plugins" />
+    <mkdir dir="docker_prod/archivesspace/plugins/lcnaf" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/indexer" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/schemas" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/backend/model/mixins" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/backend/model/reports" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/backend/controllers" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/frontend/views" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/frontend/locales" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/public/views" />
+    <mkdir dir="docker_prod/archivesspace/plugins/local/public/locales" />
+    <mkdir dir="docker_prod/archivesspace/sql" />
+    <mkdir dir="docker_prod/archivesspace/proxy-config" />
+
+    <tstamp />
+    <property name="version" value="${DSTAMP}-${TSTAMP}"/>
+    <property name="docker-tag" value="latest"/>
+
+    <copy todir="docker_prod/archivesspace/locales">
+      <fileset dir="../common/locales" />
+    </copy>
+    <copy todir="docker_prod/archivesspace/locales/public">
+      <fileset dir="../public/config/locales">
+        <include name="**/*.yml" />
+      </fileset>
+    </copy>
+
+    <copy todir="docker_prod/archivesspace/plugins/lcnaf">
+      <fileset dir="../plugins/lcnaf"/>
+    </copy>
+    <copy file="../docker-compose-prod.yml" tofile="docker_prod/archivesspace/docker-compose.yml"/>
+    <copy file="../.env.docker.prod" tofile="docker_prod/archivesspace/.env" />
+    <replace file="docker_prod/archivesspace/.env" token="@docker-tag@" value="${docker-tag}"/>
+    <copy file="../proxy/default.conf.docker.release" tofile="docker_prod/archivesspace/proxy-config/default.conf"/>
+
+    <java classpath="${jruby_classpath}" classname="org.jruby.Main" fork="true" failonerror="true">
+      <jvmarg line="${default_java_options} ${env.JAVA_OPTS}"/>
+      <env key="GEM_HOME" value="${gem_home}" />
+      <env key="GEM_PATH" value="" />
+      <env key="BUNDLE_PATH" value="${gem_home}" />
+      <arg line="-Iapp/lib scripts/export_config.rb docker_prod/archivesspace/config/config.rb" />
+    </java>
+
+    <zip zipfile="../archivesspace-docker-${version}.zip" level="9">
+      <zipfileset dir="docker_prod" />
+    </zip>
+  </target>
+
   <target name="build-zip" depends="set-classpath" description="Bundle everything up into a zip file">
     <delete failonerror="true" dir="target" />
     <mkdir dir="target/archivesspace/config" />
@@ -504,7 +558,7 @@
     </java>
   </target>
 
-  <target name="bundler:update" depends="set-classpath" description="Run bundler update against a gemfile for all or just one specific gem">
+  <target name="bundler:update" depends="set-classpath" description="Run bundler update against a gemfile for all or just one specific gem, example: ./build/run bundler:update -Donly-gem='selenium-webdriver' -Dgemfile=../frontend/Gemfile">
     <property name="build.home" location="."/>
     <property name="only-gem" value="" />
     <echo message="Fetching gems for ${gemfile}" />
@@ -561,7 +615,7 @@
 
     <echo message="Running rspec" />
     <java classpath="${jruby_classpath}" classname="org.jruby.Main" fork="true" failonerror="true" dir="${dir}">
-      <jvmarg line="${default_java_options} ${env.JAVA_OPTS}"/>
+      <jvmarg line="${default_java_options} ${env.JAVA_OPTS} -Djruby.debug.fullTrace=true"/>
       <env key="COVERAGE_REPORTS" value="${COVERAGE_REPORTS}" />
       <env key="GEM_HOME" value="${gem_home}" />
       <env key="GEM_PATH" value="" />
@@ -571,7 +625,7 @@
       <env key="APPCONFIG_SOLR_URL" value="${env.ASPACE_TEST_SOLR_URL}" />
       <env key="TEST_MODE" value="1" />
       <env key="ASPACE_TEST_APP_SERVER_URL" value="${test-server-url-arg}" />
-      <arg line="../build/gems/bin/bundle exec rspec -b --format d ${pattern-arg} ${tag-arg} ${order-arg} ${example-arg} ${spec-arg} ${extra-spec-paths}" />
+      <arg line="../build/gems/bin/bundle exec rspec -b --format d ${pattern-arg} ${tag-arg} ${order-arg} ${example-arg} ${spec-arg} ${extra-spec-paths} --profile" />
     </java>
   </target>
 
@@ -826,6 +880,29 @@
     <record name="frontend_test_log.out" action="stop" />
   </target>
 
+  <target name="frontend:devserver:prefix" depends="set-classpath, frontend:clean, frontend:copy:templates" description="Start an instance of the ArchivesSpace frontend development server">
+    <condition property="rails.env" value="test" else="development">
+      <matches pattern="true" string="${aspace.integration}" />
+    </condition>
+    <record name="frontend_test_log.out" action="start" />
+    <java classpath="${jruby_classpath}" classname="org.jruby.Main" fork="true" failonerror="true" dir="../frontend">
+      <jvmarg line="-Daspace.service=frontend -Daspace.config.backend_url=http://localhost:${aspace.backend.port} ${default_java_options} ${env.JAVA_OPTS} -Djruby.debug.fullTrace=true"/>
+      <env key="GEM_HOME" value="${gem_home}" />
+      <env key="GEM_PATH" value="" />
+      <env key="RAILS_ENV" value="${rails.env}" />
+      <env key="BUNDLE_PATH" value="${gem_home}" />
+      <env key="ASPACE_ENV" value="development" />
+      <env key="ASPACE_INTEGRATION" value="${aspace.integration}" />
+      <env key="APPCONFIG_DATA_DIRECTORY" value="${env.APPCONFIG_DATA_DIRECTORY}" />
+      <env key="APPCONFIG_DB_URL" value="${env.APPCONFIG_DB_URL}" />
+      <env key="APPCONFIG_FRONTEND_PROXY_URL" value="http://localhost/staff" />
+      <env key="APPCONFIG_PUBLIC_PROXY_URL" value="http://localhost/public" />
+      <env key="APPCONFIG_SOLR_URL" value="${env.APPCONFIG_SOLR_URL}" />
+      <arg line="script/rails s -b 0.0.0.0 --port=${aspace.frontend.port}" />
+    </java>
+    <record name="frontend_test_log.out" action="stop" />
+  </target>
+
   <target name="frontend:test" depends="set-classpath, frontend:clean, setup-integration" description="Run the frontend capybara tests">
     <property name="tag" value="~db"/>
     <antcall target="rspec">
@@ -949,6 +1026,23 @@
       <env key="APPCONFIG_DB_URL" value="${env.APPCONFIG_DB_URL}" />
       <env key="APPCONFIG_FRONTEND_PROXY_URL" value="http://localhost:3000" />
       <env key="APPCONFIG_PUBLIC_PROXY_URL" value="http://localhost:3001" />
+      <env key="APPCONFIG_SOLR_URL" value="${env.APPCONFIG_SOLR_URL}" />
+      <arg line="bin/rails s -b 0.0.0.0 --port=${aspace.public.port}" />
+    </java>
+  </target>
+
+  <target name="public:devserver:prefix" depends="set-classpath, public:clean, public:copy-shared-resources" description="Start an instance of the ArchivesSpacePublic development server">
+    <java classpath="${jruby_classpath}" classname="org.jruby.Main" fork="true" failonerror="true" dir="../public">
+      <jvmarg line="-Daspace.service=public -Daspace.config.backend_url=http://localhost:${aspace.backend.port}/ -Daspace.config.public_url=http://localhost:${aspace.public.port}/ ${default_java_options} ${env.JAVA_OPTS} -Djruby.debug.fullTrace=true"/>
+      <env key="GEM_HOME" value="${gem_home}" />
+      <env key="GEM_PATH" value="" />
+      <env key="BUNDLE_PATH" value="${gem_home}" />
+      <env key="ASPACE_ENV" value="development" />
+      <env key="ASPACE_INTEGRATION" value="${aspace.integration}" />
+      <env key="APPCONFIG_DATA_DIRECTORY" value="${env.APPCONFIG_DATA_DIRECTORY}" />
+      <env key="APPCONFIG_DB_URL" value="${env.APPCONFIG_DB_URL}" />
+      <env key="APPCONFIG_FRONTEND_PROXY_URL" value="http://localhost/staff" />
+      <env key="APPCONFIG_PUBLIC_PROXY_URL" value="http://localhost/public" />
       <env key="APPCONFIG_SOLR_URL" value="${env.APPCONFIG_SOLR_URL}" />
       <arg line="bin/rails s -b 0.0.0.0 --port=${aspace.public.port}" />
     </java>

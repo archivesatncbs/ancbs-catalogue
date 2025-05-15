@@ -4,12 +4,21 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe 'Enumeration Management', js: true do
-  let(:admin) { BackendClientMethods::ASpaceUser.new('admin', 'admin') }
-  let!(:repository) { create(:repo, repo_code: "enum_test_#{Time.now.to_i}", publish: true) }
+  before(:all) do
+    @repository = create(:repo, repo_code: "enum_test_#{Time.now.to_i}", publish: true)
+  end
 
   before(:each) do
-    login_user(admin)
-    select_repository(repository)
+    login_admin
+    select_repository(@repository)
+  end
+
+  describe 'accessibility' do
+    # 523636, 523634, 523633, 523632, 523631, 523630, 523629, 523628, 523627, 523637, 523635
+    it "has acceptable color contrast in disabled buttons" do
+      visit "/enumerations?id=14"
+      expect(page).to be_axe_clean.checking_only :'color-contrast'
+    end
   end
 
   it 'lets you add a new value to an enumeration' do
@@ -288,8 +297,6 @@ describe 'Enumeration Management', js: true do
   end
 
   it 'lets you delete a suppressed enumeration value' do
-    # TODO: somehow the test is ending up with a "Value Updated" message instead of "Value Deleted", but manual
-    # testing indicates the features works as expected with the "Value Deleted" message appearing
     now = Time.now.to_i
     click_on 'System'
     click_on 'Manage Controlled Value Lists'
@@ -314,6 +321,9 @@ describe 'Enumeration Management', js: true do
       click_on 'Suppress'
     end
 
+    element = find('.alert.alert-success.with-hide-alert')
+    expect(element.text).to eq 'Value Updated'
+
     element = find('tr', text: "enumaration_value_#{now}")
     within element do
       click_on 'Delete'
@@ -322,6 +332,8 @@ describe 'Enumeration Management', js: true do
     within '#form_enumeration' do
       click_on 'Delete Value'
     end
+
+    wait_for_ajax
 
     element = find('.alert.alert-success.with-hide-alert')
     expect(element.text).to eq 'Value Deleted'
