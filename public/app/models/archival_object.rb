@@ -60,18 +60,19 @@ class ArchivalObject < Record
     if !cite.blank?
       cite = strip_mixed_content(cite['note_text'])
     else
-      cite = strip_mixed_content(display_string)
-      cite += identifier.blank? ? '' : ", #{identifier}"
-      cite += if container_display.blank? || container_display.length > 5
-                '.'
-              else
-                @citation_container_display ||= parse_container_display(:citation => true).join('; ')
-                ", #{@citation_container_display}."
-              end
+      cite = strip_mixed_content(json['title'])
+      cite += identifier.blank? ? '' : ", #{identifier}, "
+      # cite += if container_display.blank? || container_display.length > 5
+      #           '.'
+      #         else
+      #           @citation_container_display ||= parse_container_display(:citation => true).join('; ')
+      #           ", #{@citation_container_display}."
+      #         end
 
       if resolved_resource
         ttl = resolved_resource.dig('title')
-        cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+        # cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+        cite += " #{strip_mixed_content(ttl)}, "
       end
       unless repository_information['top']['name'].blank?
         cite += " #{ repository_information['top']['name']}."
@@ -85,17 +86,18 @@ class ArchivalObject < Record
     if !cite.blank?
       cite = strip_mixed_content(cite['note_text'])
     else
-      cite = strip_mixed_content(display_string)
-      cite += identifier.blank? ? '' : ", #{identifier}"
-      cite += if container_display.blank? || container_display.length > 5
-                '.'
-              else
-                @citation_container_display ||= parse_container_display(:citation => true).join('; ')
-                ", #{@citation_container_display}."
-              end
+      cite = strip_mixed_content(json['title'])
+      cite += identifier.blank? ? '' : ", #{identifier}, "
+      # cite += if container_display.blank? || container_display.length > 5
+      #           '.'
+      #         else
+      #           @citation_container_display ||= parse_container_display(:citation => true).join('; ')
+      #           ", #{@citation_container_display}."
+      #         end
       if resolved_resource
         ttl = resolved_resource.dig('title')
-        cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+        # cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+        cite += " #{strip_mixed_content(ttl)}, "
       end
       unless repository_information['top']['name'].blank?
         cite += " #{ repository_information['top']['name']}."
