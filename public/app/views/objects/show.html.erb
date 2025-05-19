@@ -16,11 +16,11 @@
   </section>
 
   <% sidebar_position = AppConfig[:pui_collection_org_sidebar_position] %>
-  <div class="row align-items-start" id="notes_row">
+  <div class="row align-items-start mt-5 flex-column flex-lg-row" id="notes_row">
   <% if !@result.instance_of?(DigitalObject) || @has_children %>
     <div
       id="sidebar"
-      class="sidebar sidebar-container col-sm-3 resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar"
+      class="h-max col-12 col-lg-3 sidebar sidebar-container col-sm-3 resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar"
       data-sidebar-position="<%= sidebar_position %>"
     >
       <%
@@ -37,7 +37,7 @@
       <%= render partial: 'shared/children_tree', :locals => {:heading_text => heading_text, :root_node_uri => @result.root_node_uri, :current_node_uri => @result.uri} %>
     </div>
    <% end %>
-   <div class="col-sm-9 resizable-content-pane">
+   <div class="col-12 col-lg-9 px-3 resizable-content-pane">
     <% if  defined?(comp_id) && !comp_id && !@result['json']['ref_id'].blank? %>
       <span class='ref_id'>[<%=  t('archival_object._public.header.ref_id') %>: <%= @result['json']['ref_id'] %>]</span>
     <% end %>
