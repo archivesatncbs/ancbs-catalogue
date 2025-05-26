@@ -108,7 +108,7 @@ en:
     cite_item_description: Cite Item Description
     digitized: View Digital Material
     request: Request
-    print: Download PDF
+    print: Get PDF
     print-generating: Generating
     collection_overview: Collection Overview
     hierarch: Collection Organization
@@ -449,7 +449,7 @@ en:
       thumbnail: thumbnail
       link: Link to digital object
       badge_label: Digital %{level}
-      go: Go to digital object
+      go: Go to digital file
       additional: Additional File Versions
       url_encoded_data: URL-encoded data
       browse_number_digital_objects_in_collection:
