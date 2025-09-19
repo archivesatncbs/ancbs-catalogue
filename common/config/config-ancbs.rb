@@ -9,10 +9,8 @@ AppConfig[:db_url] = "jdbc:mysql://localhost:3306/<you-aspace-db>?user=<your-asp
 AppConfig[:db_max_connections] = proc { 20 + (AppConfig[:indexer_thread_count] * 2) }
 AppConfig[:db_pool_timeout] = 5 # number of seconds to wait before raising a PoolTimeout error
 AppConfig[:force_ssl] = false
-
 AppConfig[:data_directory] = File.join(Dir.home, "<relative-path-to-data-directory>")
 AppConfig[:backup_directory] = proc { File.join(AppConfig[:data_directory], "db_backups") }
-
 AppConfig[:backend_url] = "http://localhost:8089"
 AppConfig[:frontend_url] = "http://localhost:8080"
 AppConfig[:public_url] = "http://localhost:8081"
@@ -20,22 +18,19 @@ AppConfig[:oai_url] = "http://localhost:8082"
 AppConfig[:solr_url] = "http://localhost:8983/solr/archivesspace"
 AppConfig[:indexer_url] = "http://localhost:8091"
 AppConfig[:docs_url] = "http://localhost:8888"
-
 AppConfig[:frontend_proxy_url] = "https://staff.catalogue.archives.ncbs.res.in"
 AppConfig[:public_proxy_url] = "https://catalogue.archives.ncbs.res.in"
 AppConfig[:oai_proxy_url] = "https://oai.catalogue.archives.ncbs.res.in/"
-
 AppConfig[:backend_instance_urls] = proc { [AppConfig[:backend_url]] }
-
 AppConfig[:frontend_proxy_prefix] = proc { "#{URI(AppConfig[:frontend_proxy_url]).path}/".gsub(%r{/+$}, "/") }
 AppConfig[:public_proxy_prefix] = proc { "#{URI(AppConfig[:public_proxy_url]).path}/".gsub(%r{/+$}, "/") }
-
 AppConfig[:jetty_response_buffer_size_bytes] = 64 * 1024
 AppConfig[:jetty_request_buffer_size_bytes] = 64 * 1024
 AppConfig[:use_jetty_shutdown_handler] = false
 AppConfig[:jetty_shutdown_path] = "/xkcd"
-
-
+AppConfig[:oai_ead_options] = {:include_daos => true, :use_numbered_c_tags => true, :include_uris => true}
+AppConfig[:cookie_prefix] = "archivesspace"
+AppConfig[:export_eac_agency_code] = false
 
 ## LOG
 AppConfig[:frontend_log] = "<absolute-path-to-.out-file>"
@@ -62,12 +57,9 @@ AppConfig[:max_page_size] = 250
 AppConfig[:plugins_directory] = "plugins"
 AppConfig[:plugins] = ['local', 'lcnaf']
 
-
-AppConfig[:oai_ead_options] = {:include_daos => true, :use_numbered_c_tags => true, :include_uris => true}
-AppConfig[:default_admin_password] = "admin"
-
-AppConfig[:abstract_note_length] = 500
-AppConfig[:cookie_prefix] = "archivesspace"
+## SEARCH
+AppConfig[:limit_csv_fields] = true
+AppConfig[:max_search_columns] = 7
 
 #INDEXER CONFIGS
 AppConfig[:indexer_records_per_thread] = 25
@@ -78,7 +70,6 @@ AppConfig[:pui_indexing_frequency_seconds] = 30
 AppConfig[:pui_indexer_records_per_thread] = 25
 AppConfig[:pui_indexer_thread_count] = 2
 AppConfig[:index_state_class] = 'IndexState'
-
 AppConfig[:allow_other_unmapped] = false
 
 ### DATABASE
@@ -94,48 +85,38 @@ AppConfig[:shared_storage] = proc { File.join(AppConfig[:data_directory], "share
 
 AppConfig[:path_to_java] = "java"
 AppConfig[:locale] = :en
-
 AppConfig[:frontend_theme] = "ancbs"
 AppConfig[:public_theme] = "ancbs"
-
 AppConfig[:pui_search_results_page_size] = 100
 AppConfig[:pui_branding_img] = 'logotype_ancbs.svg'
 AppConfig[:pui_branding_img_alt_text] = 'Archives at NCBS'
 AppConfig[:pui_show_favicon] = true
-
 AppConfig[:frontend_branding_img] = 'ancbs/logotype_ancbs.svg'
 AppConfig[:frontend_branding_img_alt_text] = 'Archives at NCBS'
 AppConfig[:frontend_show_favicon] = true
-
 AppConfig[:enable_backend] = true
 AppConfig[:enable_frontend] = true
 AppConfig[:enable_public] = true
 AppConfig[:enable_indexer] = true
 AppConfig[:enable_docs] = true
 AppConfig[:enable_oai] = true
-
 AppConfig[:allow_password_reset] = true
 AppConfig[:allow_other_admins_access_to_system_info] = false
-
+AppConfig[:default_admin_password] = "<admin-password>"
 AppConfig[:ignore_schema_info_check] = false
 AppConfig[:disable_config_changed_warning] = false
-
 AppConfig[:demo_data_url] = ""
 AppConfig[:show_external_ids] = false
 AppConfig[:display_identifiers_in_largetree_container] = false
 AppConfig[:allow_mixed_content_title_fields] = false
-
 AppConfig[:bulk_archival_object_updater_apply_deletes] = false
 AppConfig[:bulk_archival_object_updater_create_missing_top_containers] = false
 AppConfig[:hide_do_load] = false
-
 AppConfig[:help_enabled] = true
 AppConfig[:help_url] = "https://archivesspace.atlassian.net/wiki/spaces/ArchivesSpaceUserManual/overview"
 AppConfig[:help_topic_base_url] = "https://archivesspace.atlassian.net/wiki/spaces/ArchivesSpaceUserManual/pages/"
 AppConfig[:feedback_url] = "https://archivesspace.org/contact"
-
 AppConfig[:max_linked_events_to_resolve] = 100
-
 AppConfig[:use_human_readable_urls] = false
 AppConfig[:repo_name_in_slugs] = false
 AppConfig[:auto_generate_slugs_with_id] = false
@@ -143,10 +124,10 @@ AppConfig[:generate_resource_slugs_with_eadid] = false
 AppConfig[:generate_archival_object_slugs_with_cuid] = false
 AppConfig[:include_pui_finding_aid_urls_in_marc_exports] = false
 AppConfig[:use_slug_finding_aid_urls_in_marc_exports] = false
-AppConfig[:export_eac_agency_code] = false
 AppConfig[:sort_accession_date_filter_asc] = false
 AppConfig[:show_source_in_subject_listing] = true
-
+AppConfig[:abstract_note_length] = 500
+AppConfig[:max_location_range] = 1000
 
 # REPORT
 AppConfig[:report_page_layout] = "A4"
@@ -160,9 +141,6 @@ AppConfig[:job_poll_seconds] = proc { AppConfig.has_key?(:import_poll_seconds) ?
 AppConfig[:job_timeout_seconds] = proc { AppConfig.has_key?(:import_timeout_seconds) ? AppConfig[:import_timeout_seconds] : 300 }
 AppConfig[:jobs_cancelable] = proc { (AppConfig[:db_url] != AppConfig.demo_db_url).to_s }
 AppConfig[:job_thread_count] = 2
-
-
-AppConfig[:max_location_range] = 1000
 
 ## PUI
 AppConfig[:allow_pui_language_selection] = false
@@ -182,13 +160,11 @@ AppConfig[:pui_pdf_font_files] = ["KurintoText-Rg.ttf",
                                   "NotoSerif-Regular.ttf",
                                   "NotoSerif-Bold.ttf",
                                   "NotoSerif-Italic.ttf"]
-
 AppConfig[:pui_pdf_font_name] = "Kurinto Text,Kurinto Text JP,Kurinto Text KR,Kurinto Text SC,Noto Serif"
 AppConfig[:pui_pdf_paragraph_line_height] = "125%"
 AppConfig[:pui_pdf_title_line_height] = "140%"
 AppConfig[:pui_max_concurrent_pdfs] = 2
 AppConfig[:pui_pdf_timeout] = 600
-
 AppConfig[:record_inheritance] = {
   :archival_object => {
     :inherited_fields => [
@@ -240,16 +216,13 @@ AppConfig[:record_inheritance] = {
                          ]
   }
 }
-
 AppConfig[:record_inheritance_resolves] = [
   'ancestors',
   'ancestors::linked_agents',
   'ancestors::subjects',
   # 'ancestors::instances::sub_container::top_container',
 ]
-
 AppConfig[:pui_block_referrer] = true
-
 AppConfig[:pui_hide] = {}
 AppConfig[:pui_hide][:repositories] = false
 AppConfig[:pui_hide][:resources] = false
@@ -259,7 +232,6 @@ AppConfig[:pui_hide][:subjects] = false
 AppConfig[:pui_hide][:agents] = false
 AppConfig[:pui_hide][:classifications] = false
 AppConfig[:pui_hide][:search_tab] = false
-
 AppConfig[:pui_hide][:resource_badge] = false
 AppConfig[:pui_hide][:record_badge] = true # hide by default
 AppConfig[:pui_hide][:digital_object_badge] = false
@@ -284,7 +256,6 @@ AppConfig[:pui_repos] = {}
 AppConfig[:pui_email_enabled] = false
 AppConfig[:pui_request_use_repo_email] = false
 AppConfig[:pui_display_facets_alpha] = false
-
 AppConfig[:pui_page_actions_cite] = true
 AppConfig[:pui_page_actions_request] = false
 AppConfig[:pui_page_actions_print] = true
@@ -292,29 +263,22 @@ AppConfig[:pui_page_actions_print] = true
 ## CUSTOM ACTIONS
 AppConfig[:pui_page_custom_actions] << {
   'record_type' => ['resource', 'archival_object'],
-  'label' => 'Access Guidelines', # the I18n path for the action button
-  'icon' => 'fa-hand-o-up', # the font-awesome icon CSS class
-  # the jsonmodel type to show for
-  # 'erb_partial' returns the path to an erb template from which the action will be rendered
+  'label' => 'Access Guidelines',
+  'icon' => 'fa-hand-o-up',
   'url_proc' => proc {'https://archives.ncbs.res.in/access'},
 }
-
 AppConfig[:pui_page_custom_actions] << {
   'record_type' => [ 'archival_object'],
-  'label' => 'Takedown', # the I18n path for the action button
-  'icon' => 'fa-eraser', # the font-awesome icon CSS class
-  # the jsonmodel type to show for
-  # 'erb_partial' returns the path to an erb template from which the action will be rendered
+  'label' => 'Takedown',
+  'icon' => 'fa-eraser',
   'url_proc' => proc {'https://archives.ncbs.res.in/takedown'},
 }
-
 AppConfig[:pui_page_custom_actions] << {
   'record_type' => [ 'resource'],
   'label' => 'EAD',
   'icon' => 'fa-file-code-o',
   'url_proc' => proc {|record| 'https://oai.catalogue.archives.ncbs.res.in/oai?verb=GetRecord&identifier=oai:archives.ncbs.res.in:'+record.uri+'&metadataPrefix=oai_ead'}
 }
-
 AppConfig[:pui_page_custom_actions] << {
   'record_type' => [ 'resource','archival_object'],
   'label' => 'Dublin Core',
@@ -339,7 +303,6 @@ AppConfig[:email_smtp_settings] = {
 AppConfig[:email_perform_deliveries] = true
 AppConfig[:email_raise_delivery_errors] = true
 
-
 ## ARK
 
 AppConfig[:arks_enabled] = false
@@ -350,7 +313,3 @@ AppConfig[:ark_enable_repository_shoulder] = false
 AppConfig[:ark_shoulder_delimiter] = ''
 AppConfig[:arks_allow_external_arks] = true
 AppConfig[:prune_ark_name_table] = false
-
-## SEARCH
-AppConfig[:limit_csv_fields] = true
-AppConfig[:max_search_columns] = 7
