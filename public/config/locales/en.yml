@@ -367,6 +367,10 @@ en:
         use_restrictions_apply: Use Restrictions Apply
         content_description: Content Description
         inventory: Inventory
+        disposition: Disposition
+        condition_description: Condition Description
+        accession_date: Accession Date
+        retention_rule: Retention Rule
       related_accessions:
         accessions: Related Accessions
         deaccessions: Deaccessioned Material
